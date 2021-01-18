@@ -30,7 +30,7 @@
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>
-  <view class="wx-cells" wx:if="{{!userInfo}}">
+  <view class="wx-cells" wx:if="{{!userInfo.gender}}">
     <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
   </view>
 </view>

@@ -22,6 +22,8 @@ Page({
   bindGetUserInfo (e) {
     console.log('--e--')
     console.log(e)
-    this.userInfo = e.detail.userInfo;
+    this.setData({
+      userInfo: e.detail.userInfo
+    })
   }
 })

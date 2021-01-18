@@ -22,19 +22,19 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "Home",
+        "text": "广场",
         "iconPath": "assets/home-outline.png",
         "selectedIconPath": "assets/home-selected.png"
       },
       {
         "pagePath": "pages/contacts/contacts",
-        "text": "Contacts",
+        "text": "通讯录",
         "iconPath": "assets/contacts-outline.png",
         "selectedIconPath": "assets/contacts-selected.png"
       },
       {
         "pagePath": "pages/settings/settings",
-        "text": "Settings",
+        "text": "设置",
         "iconPath": "assets/settings-outline.png",
         "selectedIconPath": "assets/settings-selected.png"
       }
