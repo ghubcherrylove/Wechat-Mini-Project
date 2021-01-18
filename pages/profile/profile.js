@@ -2,7 +2,7 @@ let app = getApp()
 Page({
   data:{
     userInfo: {},
-    genderMap: {'Male': '男', 'Mele': '女'}
+    genderMap: {'Male': '男', 'Female': '女'}
   },
   onLoad(options) {
     console.log('--options--')
