@@ -30,3 +30,4 @@
     </view>
   </view>
 </scroll-view>
+<!-- <button open-type="getUserInfo"/> -->

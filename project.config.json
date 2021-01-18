@@ -41,31 +41,31 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.4",
-  "appid": "wx3740a88d1ef2c466",
-  "projectname": "hiapp",
+  "appid": "wxb3467842ead8b165",
+  "projectname": "taapp",
   "debugOptions": {
     "hidedInDevtools": []
   },
   "scripts": {},
   "isGameTourist": false,
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
+    "plugin": {
       "list": []
     },
     "game": {
-      "list": []
-    },
-    "plugin": {
       "list": []
     },
     "gamePlugin": {
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "list": [
+        {
+          "name": "设置",
+          "pathName": "pages/settings/settings",
+          "scene": null
+        }
+      ]
     }
   }
 }

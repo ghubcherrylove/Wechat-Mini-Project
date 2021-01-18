@@ -4,15 +4,16 @@
       <image src="../../assets/logo.png" class="logo-image"></image>
     </view>
     <view class="name">
-      <text>HiApp</text>
+      <text>巷青向爱</text>
     </view>
     <view class="about">
-      <text class="about-text">GitHub: BelinChung/wxapp-hiapp</text>
-      <text class="about-text">Email: BelinChung@gmail.com</text>
-      <text class="about-text">Twitter: @BelinChung</text>
+      <text class="about-text">这是一个透明，平等，互信</text>
+      <text class="about-text">诚实，有爱，开放</text>
+      <text class="about-text">的交友社区平台</text>
     </view>
   </view>
   <view class="bottom-container">
-    <text>Copyright © 2016 BelinChung.</text>
+    <text class="about-text">Version: 0.0.1</text>
+    <text>Copyright © 2020 panmr.</text>
   </view>
 </view>

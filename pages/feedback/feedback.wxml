@@ -1,7 +1,7 @@
 <view class="container">
   <form bindsubmit="formSubmit">
     <view class="editor-container">
-      <textarea name="feedback" placeholder="Hi, have any suggestions to tell us?" class="editor-text" placeholder-class="placeholder-class" auto-focus/>
+      <textarea name="feedback" placeholder="Hi, have any suggestions to tell us?" class="editor-text" placeholder-class="placeholder-class" />
     </view>
   </form>
   <view class="tools flex-row">

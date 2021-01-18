@@ -1,6 +1,6 @@
 <view class="container">
   <view class="wx-cells">
-    <view class="wx-cell" data-route="../profile/profile" bindtap="navToPage">
+    <view class="wx-cell" data-route="../profile/profile" data-id="1" bindtap="navToPage">
       <image class="wx-cell-icon user-avatar" src="{{userInfo.avatarUrl}}"></image>
       <view class="user-info">
         <text class="user-info-text">{{userInfo.nickName}}</text>
@@ -12,7 +12,7 @@
   <view class="wx-cells">
     <view class="wx-cell" data-route="../feedback/feedback" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/feedback.png"></image>
-      <text class="wx-cell-text">Feedback</text>
+      <text class="wx-cell-text">留言</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>
@@ -26,8 +26,11 @@
   <view class="wx-cells">
     <view class="wx-cell" data-route="../about/about" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/about.png"></image>
-      <text class="wx-cell-text">About</text>
+      <text class="wx-cell-text">关于我们</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
+  </view>
+  <view class="wx-cells" wx:if="{{!userInfo}}">
+    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
   </view>
 </view>

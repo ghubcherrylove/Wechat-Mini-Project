@@ -1,9 +1,12 @@
 let app = getApp()
 Page({
   data:{
-    userInfo: {}
+    userInfo: {},
+    genderMap: {'Male': '男', 'Mele': '女'}
   },
-  onLoad() {
+  onLoad(options) {
+    console.log('--options--')
+    console.log(options)
     app.getUserInfo(userInfo => {
       userInfo.gender = userInfo.gender === 1 ? 'Male' : 'Female'
       this.setData({
