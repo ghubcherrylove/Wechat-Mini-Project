@@ -10,14 +10,23 @@ Page({
     userInfo: {},
     isLogin: app.globalData.isLogin || false
   },
-  onLoad() {
-    console.log('index app');
+  onShow() {
+    console.log('index onShow app');
     console.log(app)
     app.getUserInfo(userInfo => {
       this.setData({
         userInfo: userInfo
       })
     })
+  },
+  onLoad() {
+    // console.log('index app');
+    // console.log(app)
+    // app.getUserInfo(userInfo => {
+    //   this.setData({
+    //     userInfo: userInfo
+    //   })
+    // })
   },
   onReady() {
     this.getTimeline()  

@@ -5,8 +5,8 @@ Page({
   data:{
     userInfo: {}
   },
-  onLoad() {
-    console.log('settings app');
+  onShow() {
+    console.log('settings onShow app');
     console.log(app)
     app.getUserInfo(userInfo => {
       console.log('userInfo')
@@ -16,6 +16,17 @@ Page({
       })
     })
   },
+  onLoad() {
+    // console.log('settings app');
+    // console.log(app)
+    // app.getUserInfo(userInfo => {
+    //   console.log('userInfo')
+    //   console.log(userInfo)
+    //   this.setData({
+    //     userInfo: userInfo
+    //   })
+    // })
+  },
   navToPage(event) {
     let route = event.currentTarget.dataset.route
     wx.navigateTo({
@@ -23,7 +34,8 @@ Page({
     })
   },
   bindGetUserInfo (e) {
-    this.setData({userInfo: e.detail.userInfo})
+    let userInfo = e.detail.userInfo
+    this.setData({userInfo: userInfo})
     wx.login({
       success: _ => {
         console.log('login请求code')
@@ -36,11 +48,9 @@ Page({
           // query: {
           //   doce: _.code
           // },
-          // data: util._param({
-          //   code: _.code
-          // }),
           data: {
-            code: _.code
+            code: _.code,
+            userInfo: userInfo
           },
           method: 'POST',
           success: res => {
@@ -48,7 +58,6 @@ Page({
             console.log(res)
           },
           complete: _ => {
-            
             wx.stopPullDownRefresh()
           }
         })
