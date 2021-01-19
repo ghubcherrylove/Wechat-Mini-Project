@@ -7,9 +7,12 @@ let refreshing = false, refreshed = false, loadingMore = false, loadedEnd = fals
 Page({
   data: {
     timeline: [],
+    userInfo: {},
     isLogin: app.globalData.isLogin || false
   },
   onLoad() {
+    console.log('index app');
+    console.log(app)
     app.getUserInfo(userInfo => {
       this.setData({
         userInfo: userInfo
@@ -87,7 +90,8 @@ Page({
       // 获取到用户的信息了，打印到控制台上看下
       console.log("用户的信息如下：");
       console.log(res.detail.userInfo);
-      let userInfo = res.detail.userInfo
+      let userInfo = res.detail.userInfo;
+      app.globalData.userInfo = userInfo;
       this.setData({isLogin: true, userInfo: res.detail.userInfo});
       wx.setStorage({
         data: userInfo,

@@ -6,6 +6,8 @@ Page({
     userInfo: {}
   },
   onLoad() {
+    console.log('settings app');
+    console.log(app)
     app.getUserInfo(userInfo => {
       console.log('userInfo')
       console.log(userInfo)
@@ -21,11 +23,7 @@ Page({
     })
   },
   bindGetUserInfo (e) {
-    console.log('--e--')
-    console.log(e)
-    this.setData({
-      userInfo: e.detail.userInfo
-    })
+    this.setData({userInfo: e.detail.userInfo})
     wx.login({
       success: _ => {
         console.log('login请求code')
