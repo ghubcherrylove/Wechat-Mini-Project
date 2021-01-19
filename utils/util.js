@@ -28,5 +28,9 @@ module.exports = {
   formatNumber(n) {
     n = n.toString()
     return n[1] ? n : `0${n}`
-  }
+  },
+  _param(obj = {}) {
+    let _ = encodeURIComponent
+    return Object.keys(obj).map(k => `${_(k)}=${_(obj[k])}`).join('&')
+}
 }

@@ -1,10 +1,4 @@
-@import "../../styles/card.wxss";
-
-.timeline{
-  height: 100%;
-}
-
-/* 授权相关样式 */
+/* pages/login/login.wxss */
 .headView {
   margin: 90rpx 50rpx 90rpx 50rpx;
   /*上右下左*/

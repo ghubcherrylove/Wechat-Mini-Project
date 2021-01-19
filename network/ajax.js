@@ -1,4 +1,4 @@
-let API_PATH = 'https://raw.githubusercontent.com/BelinChung/HiApp/master/src/api/'
+let API_PATH = 'https://aicloud.thingsmatrix.co'
 
 function _param(obj = {}) {
     let _ = encodeURIComponent
