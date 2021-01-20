@@ -33,7 +33,15 @@ App({
                   url: 'sell/user/login',
                   data: {
                     code: _.code,
-                    userInfo: userInfo
+                    nickName,
+                    avatarUrl,
+                    gender,
+                    province,
+                    city,
+                    country
+                  },
+                  header: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
                   },
                   method: 'POST',
                   success: res => {
