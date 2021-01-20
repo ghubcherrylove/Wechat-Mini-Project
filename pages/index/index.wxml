@@ -9,8 +9,8 @@
 </view>
 <scroll-view wx:else scroll-y="true" bindscrolltolower="scrollToLower" class="timeline">
   <view class="tweet-container" wx:for="{{userlist}}" wx:key="id">
-    <view class="top-container flex-row">
-      <image class="card-avatar" src="{{item.avatar}}"></image>                
+    <view class="top-container">
+      <image src="{{item.avatar}}"></image>                
       <view class="user-container">
         <text class="card-name">{{item.nickname}}</text>
         <text class="card-time">{{item.age || 0}} 岁 | {{item.height}} cm | {{item.education}} | {{item.salary}} | {{item.province + '-' + item.city}}</text>
