@@ -2,6 +2,27 @@ module.exports = {
   getAvatarUrl(ID) {
     return 'http://lorempixel.com/68/68/people/' + ID
   },
+  formatSalary(number = 0) {
+    if (number >= 10000) {
+      return number/10000 + '万'
+    }
+    return number
+  },
+  formatDateTime (ms) {
+    var date = new Date(ms);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return y + '-' + m + '-' + d + ' '+ h + ':' + minute + ':' + second;
+  },
   timeFormat(ms) {
     ms = ms * 1000
     let d_second,d_minutes, d_hours, d_days
@@ -32,5 +53,5 @@ module.exports = {
   _param(obj = {}) {
     let _ = encodeURIComponent
     return Object.keys(obj).map(k => `${_(k)}=${_(obj[k])}`).join('&')
-}
+  }
 }

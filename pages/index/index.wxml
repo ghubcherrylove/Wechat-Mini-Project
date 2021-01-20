@@ -8,15 +8,15 @@
       </view>
 </view>
 <scroll-view wx:else scroll-y="true" bindscrolltolower="scrollToLower" class="timeline">
-  <view class="tweet-container" wx:for="{{timeline}}" wx:key="id">
+  <view class="tweet-container" wx:for="{{userlist}}" wx:key="id">
     <view class="top-container flex-row">
       <image class="card-avatar" src="{{item.avatar}}"></image>                
       <view class="user-container">
         <text class="card-name">{{item.nickname}}</text>
-        <text class="card-time">#{{item.id}} {{item.time}}</text>
+        <text class="card-time">{{item.age || 0}} 岁 | {{item.height}} cm | {{item.education}} | {{item.salary}} | {{item.province + '-' + item.city}}</text>
       </view>
     </view>
-    <view class="middle-container flex-column">
+    <!-- <view class="middle-container flex-column">
       <text class="message-text">{{item.text}}</text>
       <image class="message-image"
         data-original-pic="{{item.original_pic}}" 
@@ -36,6 +36,6 @@
       <view class="bottom-tool flex-row flex-rest-width">
         <text class="bottom-tool-text">Forward</text>
       </view>
-    </view>
+    </view> -->
   </view>
 </scroll-view>

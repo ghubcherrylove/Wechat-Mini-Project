@@ -1,4 +1,5 @@
-let API_PATH = 'https://aicloud.thingsmatrix.co/'
+// let API_PATH = 'https://aicloud.thingsmatrix.co/'
+let API_PATH = 'https://www.aicloud.site/'
 
 function _param(obj = {}) {
     let _ = encodeURIComponent
@@ -7,7 +8,6 @@ function _param(obj = {}) {
 
 function ajax({url, query, data, success, fail, complete, method = 'GET', header}) {
   url = API_PATH + url + '?' + _param(query)
-
   wx.request({
     url: url,
     data: data,
@@ -15,7 +15,8 @@ function ajax({url, query, data, success, fail, complete, method = 'GET', header
     header: header,
     success: res => {
         let data = res.data
-        data['err_msg'] === 'success' ? success(data) : fail(res)
+        // data['status'] === '200' ? success(data) : fail(res)
+        res.statusCode === 200 ? success(res) : fail(res)
     },
     fail: fail,
     complete: complete

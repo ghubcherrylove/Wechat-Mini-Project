@@ -1,14 +1,28 @@
 let app = getApp()
 let util = require('../../utils/util')
+let {Dict} = require('../../utils/consts')
 let ajax = require('../../network/ajax')
 
 let refreshing = false, refreshed = false, loadingMore = false, loadedEnd = false
 
 Page({
   data: {
-    timeline: [],
+    userlist: [],
     userInfo: {},
+    educationMap: [
+      {key: "1", name: "小学"},
+      {key: "2", name: "初中"},
+      {key: "3", name: "高中"},
+      {key: "4", name: "大专"},
+      {key: "5", name: "本科"},
+      {key: "6", name: "硕士"},
+      {key: "7", name: "博士"},
+      {key: "8", name: "博士后"}
+    ],
     isLogin: app.globalData.isLogin || false
+  },
+  formatEducation(list = []) {
+    
   },
   onShow() {
     console.log('index onShow app');
@@ -29,23 +43,20 @@ Page({
     // })
   },
   onReady() {
-    this.getTimeline()  
+    this.getUserList()  
   },
   onPullDownRefresh() {
     if(refreshing) return false
-
     refreshing = true
     ajax({
         url: 'refresh_timeline.json',
         success: res => {
           if(refreshed) {
-            wx.showToast({
-              title: '没有刷出新消息哦！'
-            })
+            wx.showToast({title: '没有刷出新消息哦！'})
           } else {
-            let timeline = this.formatTimeline(res.data)
+            let userlist = this.formatTimeline(res.data.list)
             this.setData({
-              timeline: [...timeline, ...this.data.timeline]
+              userlist: [...userlist, ...this.data.userlist]
             })
           }
         },
@@ -58,14 +69,13 @@ Page({
   },
   scrollToLower() {
     if(loadingMore || loadedEnd) return false
-
     loadingMore = true
     ajax({
         url: 'more_timeline.json',
         success: res => {
-          let timeline = this.formatTimeline(res.data)
+          let userlist = this.formatTimeline(res.data.list)
           this.setData({
-            timeline: [...this.data.timeline, ...timeline]
+            userlist: [...this.data.userlist, ...userlist]
           })
         },
         complete: _ => {
@@ -74,18 +84,20 @@ Page({
         }
     })
   },
-  getTimeline() {
+  getUserList() {
     wx.showToast({
       title: 'loading...',
       icon: 'loading'
     })
     ajax({
-        url: 'timeline.json',
+        url: 'sell/user/list',
         success: res => {
-          let timeline = this.formatTimeline(res.data)
-          this.setData({
-            timeline: timeline
-          })
+          let userlist = this.formatTimeline(res.data.list)
+          this.setData({userlist: userlist})
+        },
+        fail: function(res) {
+          console.log('获取用户列表失败');
+          console.log(res)
         },
         complete: _ => {
           wx.hideToast()
@@ -97,8 +109,6 @@ Page({
       //用户按了允许授权按钮
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
-      console.log("用户的信息如下：");
-      console.log(res.detail.userInfo);
       let userInfo = res.detail.userInfo;
       app.globalData.userInfo = userInfo;
       this.setData({isLogin: true, userInfo: res.detail.userInfo});
@@ -106,17 +116,8 @@ Page({
         data: userInfo,
         key: 'userInfo',
       })
-      //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
-      //       that.setData({
-      //         isHide: false
-      //       });
       wx.login({
         success: _ => {
-          console.log('login请求code')
-          console.log(_)
-          // code: "061MSi0w3ktoGV26Ph1w3rXmPv0MSi0U"
-          // errMsg: "login:ok"
-          // 登录接口 https://aicloud.thingsmatrix.co/sell/user/login
           ajax({
             url: 'sell/user/login',
             data: {
@@ -127,6 +128,10 @@ Page({
             success: res => {
               console.log('登录成功，后端并返回openid给前端')
               console.log(res)
+            },
+            fail: function (fail) {
+              console.log('fail')
+              console.log(fail)
             },
             complete: _ => {
               wx.stopPullDownRefresh()
@@ -150,10 +155,13 @@ Page({
       });
     }
   },
-  formatTimeline(items) {
+  formatTimeline(items = []) {
     items.forEach(item => {
-      item.avatar = util.getAvatarUrl(item.avatar)
-      item.time = util.timeFormat(item.created_at)
+      // item.avatar = util.getAvatarUrl(item.avatar)
+      item.time = util.formatDateTime(item.time)
+      item.salary = util.formatSalary(item.salary)
+      
+      item.education = Dict.getText(item.education, Dict.store.EDUCATIONS)
       return item
     })
     return items
