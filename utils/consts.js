@@ -1,3 +1,14 @@
+// educationMap = [
+//   {key: "1", name: "小学"},
+//   {key: "2", name: "初中"},
+//   {key: "3", name: "高中"},
+//   {key: "4", name: "大专"},
+//   {key: "5", name: "本科"},
+//   {key: "6", name: "硕士"},
+//   {key: "7", name: "博士"},
+//   {key: "8", name: "博士后"}
+// ]
+
 let Dict = {
   store: {
     EDUCATIONS: [

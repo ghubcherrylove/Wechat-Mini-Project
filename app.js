@@ -4,73 +4,10 @@ App({
   onLaunch() {
    //TODO
    let that = this;
-   wx.getSetting({
-     success: function(res) {
-      if (res.authSetting['scope.userInfo']) {// 授权用户
-        // 必须是在用户已经授权的情况下调用
-        wx.getUserInfo({
-          success: function(res) {
-            console.log('在用户已经授权的情况下获取用户信息')
-            let userInfo = res.userInfo
-            let nickName = userInfo.nickName
-            let avatarUrl = userInfo.avatarUrl
-            let gender = userInfo.gender //性别 0：未知、1：男、2：女
-            let province = userInfo.province
-            let city = userInfo.city
-            let country = userInfo.country
-            that.globalData.isLogin = true;
-            that.globalData.userInfo = res.userInfo;
-            wx.login({
-              success: _ => {
-                // console.log('login请求code')
-                // console.log(_)
-                let code = _.code;
-                // code: "061MSi0w3ktoGV26Ph1w3rXmPv0MSi0U"
-                // errMsg: "login:ok"
-                // 登录接口 https://aicloud.thingsmatrix.co/sell/user/login
-                ajax({
-                  url: 'sell/user/login',
-                  data: {
-                    code,
-                    nickName,
-                    avatarUrl,
-                    gender,
-                    province,
-                    city,
-                    country
-                  },
-                  header: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                  },
-                  method: 'POST',
-                  success: res => {
-                    console.log('登录成功，后端并返回openid给前端')
-                    console.log(res)
-                    wx.setStorage({
-                      data: res.data.openid,
-                      key: 'openid',
-                    })
-                  },
-                  fail: function (fail) {
-                    console.log('登录失败')
-                  },
-                  complete: _ => {
-                    wx.stopPullDownRefresh()
-                  }
-                })
-              }
-            })
-          }
-        })
-      } else { // 未授权用户
-        that.globalData.isLogin = false;
-        console.log('未授权用户, 跳转到login页面 点击授权按钮')
-        // wx.navigateTo({
-        //   url: '../../pages/login/login',
-        // })
-      }
-     }
-   })
+    let userStorageInfo = wx.getStorageSync("userInfo");
+    if (userStorageInfo) {
+      that.globalData.userInfo = userStorageInfo;
+    }
   },
   getUserInfo(cb) {
     console.log('app')
@@ -92,8 +29,65 @@ App({
       })
     }
   },
+  // 全局登录方法
+  login(callback = () => {}) {
+    let that = this;
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            withCredentials: true, // 非必填, 默认为true
+            success: function (userinfo) {
+              console.log('用户信息')
+              console.log(userinfo)
+              that.globalData.userInfo = userinfo;
+              wx.login({
+                success: res => {
+                  // 获取到用户的 code 之后：res.code
+                  console.log("用户的code:" + res.code);
+                  let code = res.code;
+                  // 可以传给后台，再经过解析获取用户的 openid
+                  ajax({
+                    url: 'api/auth/login',
+                    data: {
+                      code,
+                      userName: "",
+                      password: "",
+                      authType: 1,
+                      rawData: userinfo.rawData, // 用户非敏感信息
+                      signature: userinfo.signature, // 签名
+                      encryptedData: userinfo.encryptedData, // 用户敏感信息
+                      iv: userinfo.iv, // 解密算法的向量
+                    },
+                    header: {
+                      'Content-Type': 'application/json'
+                    },
+                    method: 'POST',
+                    success: res => {
+                      console.log('登录成功，后端并返回openid给前端')
+                      console.log(res)
+                      wx.setStorage({data: res.data.openid, key: 'openid'})
+                      callback(res)
+                    },
+                    fail: function (fail) {
+                      console.log('登录失败')
+                      callback(fail)
+                    },
+                    complete: _ => {
+                      wx.stopPullDownRefresh()
+                    }
+                  })
+                }
+              });
+            }
+          });
+        } else {
+          // 用户没有授权
+        }
+      }
+    });
+  },
   globalData: {
-    userInfo: null,
-    isLogin: false
+    userInfo: null
   }
 })

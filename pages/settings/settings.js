@@ -17,15 +17,15 @@ Page({
     })
   },
   onLoad() {
-    // console.log('settings app');
-    // console.log(app)
-    // app.getUserInfo(userInfo => {
-    //   console.log('userInfo')
-    //   console.log(userInfo)
-    //   this.setData({
-    //     userInfo: userInfo
-    //   })
-    // })
+    console.log('settings app');
+    console.log(app)
+    app.getUserInfo(userInfo => {
+      console.log('userInfo')
+      console.log(userInfo)
+      this.setData({
+        userInfo: userInfo
+      })
+    })
   },
   navToPage(event) {
     let route = event.currentTarget.dataset.route

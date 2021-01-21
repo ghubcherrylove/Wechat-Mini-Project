@@ -1,13 +1,14 @@
-<view wx:if="{{!userInfo.nickName}}">
-    <view class='headView'>
+<view wx:if="{{isHide}}">
+    <view wx:if="{{canIUse}}" class='headView'>
         <view class='headImageView'>
           </view>
         <view class='titleText'>申请获取以下权限</view>
         <view class='contentText'>获得你的公开信息(昵称,头像,手机等)</view>
         <button class='authBtn' type='primary' open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>授权登录</button>
       </view>
+    <view wx:else>请升级微信版本</view>
 </view>
-<scroll-view wx:else scroll-y="true" bindscrolltolower="scrollToLower" class="timeline">
+<scroll-view wx:if="{{!isHide}}" scroll-y="true" bindscrolltolower="scrollToLower" class="timeline">
   <view class="tweet-container" wx:for="{{userlist}}" wx:key="id">
     <view class="top-container">
       <image src="{{item.avatar}}"></image>                
@@ -16,26 +17,5 @@
         <text class="card-time">{{item.age || 0}} 岁 | {{item.height}} cm | {{item.education}} | {{item.salary}} | {{item.province + '-' + item.city}}</text>
       </view>
     </view>
-    <!-- <view class="middle-container flex-column">
-      <text class="message-text">{{item.text}}</text>
-      <image class="message-image"
-        data-original-pic="{{item.original_pic}}" 
-        wx:if="{{item.original_pic}}" 
-        src="{{item.original_pic}}" 
-        mode="aspectFill"
-        catchtap="previewImage"
-      ></image>
-    </view>
-    <view class="bottom-container flex-row">
-      <view class="bottom-tool flex-row flex-rest-width">
-        <text class="bottom-tool-text">Forward</text>
-      </view>
-      <view class="bottom-tool flex-row flex-rest-width">
-        <text class="bottom-tool-text">Comment</text>
-      </view>
-      <view class="bottom-tool flex-row flex-rest-width">
-        <text class="bottom-tool-text">Forward</text>
-      </view>
-    </view> -->
   </view>
 </scroll-view>

@@ -1,5 +1,5 @@
 // let API_PATH = 'https://aicloud.thingsmatrix.co/'
-let API_PATH = 'https://www.aicloud.site/'
+let API_PATH = 'http://localhost:8000/'
 
 function _param(obj = {}) {
     let _ = encodeURIComponent
@@ -7,9 +7,9 @@ function _param(obj = {}) {
 }
 
 function ajax({url, query, data, success, fail, complete, method = 'GET', header}) {
-  url = API_PATH + url + '?' + _param(query)
+  // url = API_PATH + url + '?' + _param(query)
   wx.request({
-    url: url,
+    url: API_PATH + url,
     data: data,
     method: method,
     header: header,
