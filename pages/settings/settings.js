@@ -5,23 +5,23 @@ Page({
   data:{
     userInfo: {}
   },
-  onShow() {
-    console.log('settings onShow app');
-    console.log(app)
-    app.getUserInfo(userInfo => {
-      console.log('userInfo')
-      console.log(userInfo)
-      this.setData({
-        userInfo: userInfo
-      })
-    })
-  },
+  // onShow() {
+  //   console.log('settings onShow app');
+  //   console.log(app)
+  //   app.getUserInfo(userInfo => {
+  //     console.log('userInfo')
+  //     console.log(userInfo)
+  //     this.setData({
+  //       userInfo: userInfo
+  //     })
+  //   })
+  // },
   onLoad() {
-    console.log('settings app');
-    console.log(app)
+    // console.log('settings app');
+    // console.log(app)
     app.getUserInfo(userInfo => {
-      console.log('userInfo')
-      console.log(userInfo)
+      // console.log('userInfo')
+      // console.log(userInfo)
       this.setData({
         userInfo: userInfo
       })

@@ -45,6 +45,16 @@
 .card-avatar {
   
 }
+.empty {
+  display: flex;
+  height: 100%;
+  justify-content: center; /* 水平居中 */
+  align-items: center;     /* 垂直居中 */
+}
+.empty-text {
+  font-size: 48rpx;
+  color: #999;
+}
 
 .authBtn {
   margin-top: 35px;

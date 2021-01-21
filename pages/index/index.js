@@ -15,23 +15,34 @@ Page({
     userlist: [],
     userInfo: {},
     isHide: false,
+    empty: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad() {
-    this.login(res => {
-      if (res.statusCode !== 200) { // 登录失败
-        wx.showToast({
-          title: '登录失败',
-        })
+    let that = this;
+    try {
+      let value = wx.getStorageSync('userInfo')
+      if (value) {
+        that.getUserList()
       } else {
-        wx.showToast({
-          title: '登录成功',
+        that.login(res => {
+          if (res.statusCode !== 200) { // 登录失败
+            wx.showToast({
+              title: '登录失败',
+            })
+          } else {
+            wx.showToast({
+              title: '登录成功',
+            })
+            that.setData({isHide: false})
+            // 获取用户列表
+            that.getUserList()
+          }
         })
-        this.setData({isHide: false})
-        // 获取用户列表
-        this.getUserList()
       }
-    })
+    } catch (e) {
+      // Do something when catch error
+    }
   },
   login(callback = () => {}) {
     let that = this;
@@ -43,7 +54,6 @@ Page({
             success: function (userinfo) {
               // console.log('用户信息')
               // console.log(userinfo)
-              // wx.setStorage({data: userinfo, key: 'userInfo'})
               // 用户已经授权过,不需要显示授权页面,所以不需要改变 isHide 的值
               // 根据自己的需求有其他操作再补充
               // 我这里实现的是在用户授权成功后，调用微信的 wx.login 接口，从而获取code
@@ -138,6 +148,7 @@ Page({
     })
   },
   getUserList() {
+    let that = this;
     wx.showToast({
       title: 'loading...',
       icon: 'loading'
@@ -150,6 +161,7 @@ Page({
       },
       fail: function (res) {
         console.log('获取用户列表失败');
+        that.setData({empty: true})
         console.log(res)
       },
       complete: _ => {
@@ -172,35 +184,6 @@ Page({
         // 获取用户列表
         this.getUserList()
       })
-      // wx.login({
-      //   success: _ => {
-      //     ajax({
-      //       url: 'api/auth/login',
-      //       data: {
-      //         code: _.code,
-      //         userName: "",
-      //         password: "",
-      //         authType: 1,
-      //         rawData: userInfo.rawData, // 用户非敏感信息
-      //         signature: userInfo.signature, // 签名
-      //         encryptedData: userInfo.encryptedData, // 用户敏感信息
-      //         iv: userInfo.iv, // 解密算法的向量
-      //       },
-      //       method: 'POST',
-      //       success: res => {
-      //         console.log('登录成功，后端并返回openid给前端')
-      //         console.log(res)
-      //       },
-      //       fail: function (fail) {
-      //         console.log('fail')
-      //         console.log(fail)
-      //       },
-      //       complete: _ => {
-      //         wx.stopPullDownRefresh()
-      //       }
-      //     })
-      //   }
-      // })
     } else {
       //用户按了拒绝按钮
       wx.showModal({
