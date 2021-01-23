@@ -107,7 +107,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">工作单位</text>
       <view class="wx-cell-right">
-        <input name="corporation" type="number" placeholder="请输入您的民族" />
+        <input name="corporation" placeholder="请输入您的工作单位" />
         </view>
     </view>
   </view>
@@ -125,7 +125,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">职业</text>
       <view class="wx-cell-right">
-        <input name="job" type="number" placeholder="请输入您的职业" />
+        <input name="job" placeholder="请输入您的职业" />
       </view>
     </view>
   </view>
@@ -134,7 +134,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">微信账号</text>
       <view class="wx-cell-right">
-        <input name="wechatAccount" type="number" placeholder="请输入您的职业" />
+        <input name="wechatAccount" placeholder="请输入您的职业" />
       </view>
     </view>
   </view>
