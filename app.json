@@ -28,12 +28,6 @@
         "selectedIconPath": "assets/home-selected.png"
       },
       {
-        "pagePath": "pages/contacts/contacts",
-        "text": "消息",
-        "iconPath": "assets/contacts-outline.png",
-        "selectedIconPath": "assets/contacts-selected.png"
-      },
-      {
         "pagePath": "pages/settings/settings",
         "text": "我的",
         "iconPath": "assets/settings-outline.png",

@@ -1,5 +1,5 @@
-// let API_PATH = 'https://aicloud.thingsmatrix.co/'
-let API_PATH = 'http://localhost:8000/'
+let API_PATH = 'https://aicloud.thingsmatrix.co/'
+// let API_PATH = 'http://localhost:8000/'
 
 function _param(obj = {}) {
     let _ = encodeURIComponent
@@ -14,9 +14,7 @@ function ajax({url, query, data, success, fail, complete, method = 'GET', header
     method: method,
     header: header,
     success: res => {
-        let data = res.data
-        // data['status'] === '200' ? success(data) : fail(res)
-        res.statusCode === 200 ? success(res) : fail(res)
+        res.success ? success(res) : fail(res)
     },
     fail: fail,
     complete: complete

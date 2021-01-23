@@ -13,8 +13,12 @@
     <view class="top-container">
       <image src="{{item.avatar}}"></image>                
       <view class="user-container">
-        <text class="card-name">{{item.nickname}}</text>
-        <text class="card-time">{{item.age || 0}} 岁 | {{item.height}} cm | {{item.education}} | {{item.salary}} | {{item.province + '-' + item.city}}</text>
+        <!-- <text class="card-name">{{item.realName}}</text> -->
+        <!-- <text class="card-name">{{'爱好:' + item.hobby || '无'}}</text> -->
+        <text class="card-name">{{item.job || '无'}}</text>
+        <!-- <text class="card-name">{{'擅长:' + item.skill || '无'}}</text> -->
+        <text class="card-time">{{item.birthDate}} | {{item.height}} cm | {{item.weight}} kg | {{item.education}} | {{item.salary || 0}} | {{item.hobby || '无'}}</text>
+        <text class="card-time">{{'个性签名:' + item.selfIntroduction || '无'}}</text>
       </view>
     </view>
   </view>

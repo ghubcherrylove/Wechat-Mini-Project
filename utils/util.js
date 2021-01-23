@@ -8,6 +8,17 @@ module.exports = {
     }
     return number
   },
+  formatDateYear(ms) {
+    var date = new Date(ms);
+    var y = date.getFullYear();
+    return y;
+  },
+  formatDateMonth(ms) {
+    var date = new Date(ms);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    return y + '-' + m;
+  },
   formatDateTime (ms) {
     var date = new Date(ms);
     var y = date.getFullYear();
