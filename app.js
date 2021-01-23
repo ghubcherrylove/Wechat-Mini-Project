@@ -1,4 +1,3 @@
-let ajax = require('./network/ajax')
 let config = require('./config/index')
 let LoginService = require('./services/LoginService')
 
@@ -39,16 +38,16 @@ App({
                 signature: infoRes.signature, // 签名
                 encryptedData: infoRes.encryptedData, // 用户敏感信息
                 iv: infoRes.iv, // 解密算法的向量
-                token: wx.getStorageSync("loginFlag"),
+                token: wx.getStorageSync("Authorization"),
               }).then(res => {
                 if (res.success) {
                   that.globalData.userInfo = res.module.userInfo;
                   that.globalData.Authorization = res.module.token;
-                  wx.setStorageSync("userInfo", res.module.userInfo);
-                  wx.setStorageSync("loginFlag", res.module.token);
+                  // wx.setStorageSync("userInfo", res.module.userInfo);
+                  wx.setStorageSync("Authorization", res.module.token);
                   console.log(111111)
                   if (callback) {
-                    callback();
+                    callback(res);
                   }
                 } else {
                   that.showInfo(res.message);

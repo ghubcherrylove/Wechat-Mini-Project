@@ -1,9 +1,7 @@
 let app = getApp()
 let util = require('../../utils/util')
 let UserService = require('../../services/UserService')
-let {
-  Dict
-} = require('../../utils/consts')
+let {Dict} = require('../../utils/consts')
 let ajax = require('../../network/ajax')
 
 let refreshing = false,
@@ -15,84 +13,71 @@ Page({
   data: {
     userlist: [],
     userInfo: {},
+    EDUCATIONS: Dict.store.EDUCATIONS,
+    BUY_HOUSES: Dict.store.BUY_HOUSES,
+    BUY_CARS: Dict.store.BUY_CARS,
+    MARRIEDS: Dict.store.MARRIEDS,
     isHide: false,
     empty: false,
     param: {
       page: 0,
       size: 10
     },
-    // new Date(item.birthDate).getFullYear() + new Date(item.birthDate).getMonth()
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad() {
     let that = this;
     if (app.globalData.userInfo) {
-      that.getUserList(this.param)
+      that.getUserList(this.data.param)
     } else {
       this.setData({isHide: true})
-      // app.doLogin(res => {
-      //   that.getUserList()
-      // });
     }
   },
   onReady() {
     // this.getUserList()
   },
-  onPullDownRefresh() {
-    if (refreshing) return false
-    refreshing = true
-    ajax({
-      url: 'refresh_timeline.json',
-      success: res => {
-        if (refreshed) {
-          wx.showToast({
-            title: '没有刷出新消息哦！'
-          })
-        } else {
-          let userlist = this.formatTimeline(res.data.list)
-          this.setData({
-            userlist: [...userlist, ...this.data.userlist]
-          })
-        }
-      },
-      complete: _ => {
-        refreshing = false
-        refreshed = true
-        wx.stopPullDownRefresh()
-      }
-    })
-  },
   scrollToLower() {
     if (loadingMore || loadedEnd) return false
-    loadingMore = true
-    ajax({
-      url: 'more_timeline.json',
-      success: res => {
-        let userlist = this.formatTimeline(res.data.list)
-        this.setData({
-          userlist: [...this.data.userlist, ...userlist]
-        })
-      },
-      complete: _ => {
-        loadingMore = false
-        loadedEnd = true
-      }
+    loadingMore = true;
+    this.getUserList({page: this.data.param.page++, size: this.data.param.size}, content => {
+      let userlist = that.formatTimeline(content)
+      this.setData({
+        userlist: [...this.data.userlist, ...userlist]
+      })
     })
+    // this.getUserList({page: this.data.param.page++, size: this.data.param.size}).then(res => {
+    //   if (refreshed) {
+    //     wx.showToast({
+    //       title: '没有刷出新消息哦！'
+    //     })
+    //   } else {
+    //     let userlist = this.formatTimeline(res.content)
+    //     this.setData({
+    //       userlist: [...this.data.userlist, ...userlist]
+    //     })
+    //   }
+    // })
   },
-  getUserList(param = {page:0, size: 10}) {
+  async getUserList(query = {page:0, size: 10}, callback) {
     let that = this;
     wx.showToast({
       title: 'loading...',
       icon: 'loading'
     })
-    UserService.list(param).then(res => {
-      // if (res.success) {
-      //   let userlist = this.formatTimeline(res.data.list)
-      //   this.setData({userlist: userlist})
-      // }
-      let userlist = this.formatTimeline(res.content)
-      this.setData({userlist: userlist})
-    })
+    // UserService.list(this.data.param).then(data => {
+    //   let userlist = this.formatTimeline(res.content)
+    //   this.setData({userlist: userlist})
+    //   if (callback) {
+    //     callback(res);
+    //   }
+    // })
+    // 第一个data参数 第二个是query查询参数 page:0 size: 10
+    let {content = []} = await UserService.list(this.data.param);
+    if (callback) {
+      callback(content)
+    } else {
+      this.setData({userlist: content})
+    }
   },
   bindGetUserInfo: function (res) {
     if (res.detail.userInfo) {
@@ -102,7 +87,12 @@ Page({
       let userInfo = res.detail.userInfo;
       this.setData({isHide: false})
       app.doLogin(res => {
-        this.getUserList()
+        if (res.success) {
+          wx.setStorageSync("Authorization", res.module.token);
+          wx.setStorageSync("userInfo", res.module.userInfo);
+          this.getUserList(this.data.param)
+        }
+        this.getUserList(this.data.param)
       });
     } else {
       //用户按了拒绝按钮
@@ -122,11 +112,10 @@ Page({
   },
   formatTimeline(items = []) {
     items.forEach(item => {
-      // item.avatar = util.getAvatarUrl(item.avatar)
       item.time = util.formatDateTime(item.time)
       item.salary = util.formatSalary(item.salary)
       item.birthDate = util.formatDateYear(item.birthDate)
-      item.education = Dict.getText(item.education, Dict.store.EDUCATIONS)
+      // item.education = Dict.getText(item.education, Dict.store.EDUCATIONS)
       return item
     })
     return items

@@ -6,7 +6,7 @@
   "setting": {
     "urlCheck": false,
     "es6": true,
-    "enhance": false,
+    "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -69,6 +69,18 @@
         {
           "name": "pages/login/login",
           "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "认证",
+          "pathName": "pages/certification/certification",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "完善信息",
+          "pathName": "pages/user/info",
           "scene": null
         }
       ]

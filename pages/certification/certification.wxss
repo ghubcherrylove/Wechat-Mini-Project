@@ -1,0 +1,13 @@
+/* pages/certification/certification.wxss */
+.form {
+
+}
+
+.page-section {
+  padding: 15px;
+}
+
+.button-sp-area{
+  margin: 0 auto;
+  width: 60%;
+}

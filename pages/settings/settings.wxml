@@ -10,16 +10,16 @@
     </view>
   </view>
   <view class="wx-cells">
-    <view class="wx-cell" data-route="../feedback/feedback" bindtap="navToPage">
+    <view class="wx-cell" data-route="../user/info" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/feedback.png"></image>
-      <text class="wx-cell-text">留言</text>
+      <text class="wx-cell-text">完善信息</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>
   <view class="wx-cells">
-    <view class="wx-cell">
+    <view class="wx-cell" data-route="../certification/certification" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/language.png"></image>
-      <text class="wx-cell-text">Language</text>
+      <text class="wx-cell-text">认证</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>

@@ -1,4 +1,4 @@
-let ajax = require('../network/ajax1')
+let ajax = require('../network/ajax')
 
 // 登录
 export function login(data = {}) {

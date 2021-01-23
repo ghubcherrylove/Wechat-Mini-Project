@@ -1,0 +1,201 @@
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">姓名</text>
+      <view class="wx-cell-right">
+        <input name="realName" placeholder="请输入您的姓名" />
+        </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">性别</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindSexChange" name="sex" value="{{entity.sex}}" range="{{sexs}}">
+          <view class="picker">
+            {{sexs[entity.sex]}}
+            <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">出生日期</text>
+      <view class="weui-cell__bd" style="float: right;">
+          <picker mode="date" name="birthDate" value="{{entity.date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              {{entity.date}}
+              <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+            </view>
+          </picker>
+        </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">身高(cm)</text>
+      <view class="wx-cell-right">
+        <input name="height" type="number" placeholder="请输入您的身高" />
+        </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">体重(kg)</text>
+      <view class="wx-cell-right">
+        <input name="weight" type="number" placeholder="请输入您的体重" />
+        </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">星座</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindConstellationChange" name="constellation" value="{{entity.constellation}}" range="{{constellations}}">
+          <view class="picker">
+            {{constellations[entity.constellation]}}
+            <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+          </view>
+        </picker>
+        </view>
+    </view>
+  </view>
+
+  <!-- <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">血型</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindConstellationChange" name="constellation" value="{{entity.constellation}}" range="{{constellations}}">
+          <view class="picker">
+            {{constellations[entity.constellation]}}
+          </view>
+        </picker>
+        </view>
+    </view>
+  </view> -->
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">月收入</text>
+      <view class="wx-cell-right">
+        <input name="salary" type="number" placeholder="请输入您的收入" />
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">民族</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindConstellationChange" name="constellation" value="{{entity.constellation}}" range="{{constellations}}">
+          <view class="picker">
+            {{constellations[entity.constellation]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view> -->
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">工作单位</text>
+      <view class="wx-cell-right">
+        <input name="corporation" type="number" placeholder="请输入您的民族" />
+        </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">手机</text>
+      <view class="wx-cell-right">
+        <input name="phone" type="number" placeholder="请输入您的手机" />
+        </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">职业</text>
+      <view class="wx-cell-right">
+        <input name="job" type="number" placeholder="请输入您的职业" />
+      </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">微信账号</text>
+      <view class="wx-cell-right">
+        <input name="wechatAccount" type="number" placeholder="请输入您的职业" />
+      </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">是否有车</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindIsBuyCarChange" name="isBuyCar" value="{{entity.isBuyCar}}" range="{{cars}}">
+          <view class="picker">
+            {{BUY_CARS[entity.isBuyCar]}}
+            <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">是否有房</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindIsBuyHouseChange" name="education" value="{{entity.isBuyHouse}}" range="{{houses}}">
+          <view class="picker">
+            {{BUY_HOUSES[entity.isBuyHouse]}}
+            <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">学历</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindEducationChange" name="education" value="{{entity.education}}" range="{{educations}}">
+          <view class="picker">
+            {{educations[entity.education]}}
+            <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
+      <text class="wx-cell-text">婚姻状况</text>
+      <view class="wx-cell-right">
+        <picker bindchange="bindIsMarriedChange" name="isMarried" value="{{entity.isMarried}}" range="{{marrieds}}">
+          <view class="picker">
+            {{marrieds[entity.isMarried]}}
+            <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-area button-sp-area">
+    <button style="margin: 100rpx 0; background: #ff9630" type="primary" formType="submit">提交</button>
+  </view>
+</form>

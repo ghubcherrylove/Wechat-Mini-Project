@@ -2,6 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/login/login",
+    "pages/user/info",
+    "pages/certification/certification",
     "pages/contacts/contacts",
     "pages/settings/settings",
     "pages/about/about",

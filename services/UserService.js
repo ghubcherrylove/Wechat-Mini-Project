@@ -1,12 +1,20 @@
-let ajax = require('../network/ajax1')
+let ajax = require('../network/ajax')
 // let util = require('../utils/util')
 
 // 用户列表
-export function list(data = {}) {
-  return ajax({url: 'api/user/pagination', query: data, data: {personDTO: {}}, method: 'POST'})
+export function list(query = {page: 0, size: 10}) {
+  return ajax({url: 'api/user/pagination', query: query, data: {personDTO: {}}, method: 'POST'})
 }
-// 退出
-export function logout(data = {}) {
-  return ajax({url: 'api/user/logout', data, method: 'POST'})
+// 用户列表
+export function getUserInfoByOpenid(openId = '') {
+  return ajax({url: 'api/user/' + openId, method: 'GET'})
+}
+// 完善个人信息
+export function info(data = {}) {
+  return ajax({url: 'api/user/info', data, method: 'POST'})
+}
+// 实名认证
+export function verify(data = {}) {
+  return ajax({url: 'api/user/verify', data, method: 'POST'})
 }
 

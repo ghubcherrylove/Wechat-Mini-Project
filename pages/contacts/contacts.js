@@ -1,5 +1,4 @@
 let util = require('../../utils/util')
-let ajax = require('../../network/ajax')
 
 Page({
   data:{

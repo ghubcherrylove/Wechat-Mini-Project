@@ -9,16 +9,14 @@
     <view wx:else>请升级微信版本</view>
 </view>
 <scroll-view scroll-y="true" bindscrolltolower="scrollToLower" class="timeline">
-  <view wx:if="{{!isHide}}" class="tweet-container" wx:for="{{userlist}}" wx:key="id">
+  <view wx:if="{{!isHide}}" class="tweet-container" wx:for="{{userlist}}" wx:key="id" >
     <view class="top-container">
-      <image src="{{item.avatar}}"></image>                
+      <image src="{{item.avatorUrl}}"></image>                
       <view class="user-container">
-        <!-- <text class="card-name">{{item.realName}}</text> -->
-        <!-- <text class="card-name">{{'爱好:' + item.hobby || '无'}}</text> -->
         <text class="card-name">{{item.job || '无'}}</text>
-        <!-- <text class="card-name">{{'擅长:' + item.skill || '无'}}</text> -->
-        <text class="card-time">{{item.birthDate}} | {{item.height}} cm | {{item.weight}} kg | {{item.education}} | {{item.salary || 0}} | {{item.hobby || '无'}}</text>
-        <text class="card-time">{{'个性签名:' + item.selfIntroduction || '无'}}</text>
+        <text class="card-time">{{item.birthDate}} | {{item.height || '0'}} cm | {{item.weight || '0'}} kg | {{EDUCATIONS[item.education] || ''}} | {{item.salary || 0}} | {{BUY_CARS[item.isBuyCar] || '无'}} | {{BUY_HOUSES[item.isBuyHouse] || '无'}} | {{MARRIEDS[item.isMarried] || '无'}}</text>
+        <text class="card-time">{{'兴趣爱好:' + (item.hobby || '无')}}</text>
+        <text class="card-time">{{'个性签名:' + (item.selfIntroduction || '无')}}</text>
       </view>
     </view>
   </view>
