@@ -40,8 +40,8 @@ Page({
     if (loadingMore || loadedEnd) return false
     loadingMore = true;
     let that = this;
-    this.getUserList({page: this.data.param.page++, size: this.data.param.size}, content => {
-      let userlist = that.formatTimeline(content)
+    this.getUserList({page: this.data.param.page++, size: this.data.param.size}, data => {
+      let userlist = that.formatTimeline(data.content)
       this.setData({
         userlist: [...this.data.userlist, ...userlist]
       })
@@ -73,11 +73,13 @@ Page({
     //   }
     // })
     // 第一个data参数 第二个是query查询参数 page:0 size: 10
-    let {content = []} = await UserService.list(this.data.param);
-    if (callback) {
-      callback(content)
-    } else {
-      this.setData({userlist: content})
+    let {code = 1, data = {}, msg = ''} = await UserService.list(this.data.param);
+    if (code === 0) { // 成功
+      if (callback) {
+        callback(data)
+      } else {
+        this.setData({userlist: data.content})
+      }
     }
   },
   bindGetUserInfo: function (res) {
@@ -88,12 +90,12 @@ Page({
       let userInfo = res.detail.userInfo;
       this.setData({isHide: false})
       app.doLogin(res => {
-        if (res.success) {
-          wx.setStorageSync("Authorization", res.module.token);
-          wx.setStorageSync("userInfo", res.module.userInfo);
+        if (res.code === 0) { // 成功
+          wx.setStorageSync("Authorization", res.data.module.token);
+          wx.setStorageSync("userInfo", res.data.module.userInfo);
           this.getUserList(this.data.param)
         }
-        this.getUserList(this.data.param)
+        // this.getUserList(this.data.param)
       });
     } else {
       //用户按了拒绝按钮

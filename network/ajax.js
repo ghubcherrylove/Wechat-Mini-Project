@@ -40,8 +40,17 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
         header: {...{Authorization: wx.getStorageSync("Authorization")},...header},
         success: res => {
           wx.hideLoading()
-          if (res.statusCode >= 200 && res.statusCode <= 300) {
-            resolve(res.data)
+          // res = {cookies: [], data: {code: 0, msg: '', data: {}}, errMsg: '', header: {}, statusCode: 200}
+          if (res.statusCode >= 200 && res.statusCode <= 300) { // http协议的状态码
+            if (res.data.code === 0) { // 这是与后端定义的成功标识
+              resolve(res.data)
+            } else {
+              let message = res.data.msg;
+              wx.showToast({
+                title: message || '请求失败!'
+              })
+              reject(res.data)
+            }
           } else {
             let message = codeMessage[res.statusCode];
             wx.showToast({

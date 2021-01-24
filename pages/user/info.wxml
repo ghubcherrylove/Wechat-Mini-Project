@@ -26,9 +26,9 @@
     <view class="wx-cell">
       <text class="wx-cell-text">出生日期</text>
       <view class="weui-cell__bd" style="float: right;">
-          <picker mode="date" name="birthDate" value="{{entity.date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+          <picker mode="date" name="birthDate" value="{{entity.birthDate}}" start="1980-01-01" end="2005-01-01" bindchange="bindDateChange">
             <view class="picker">
-              {{entity.date}}
+              {{entity.birthDate}}
               <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
             </view>
           </picker>

@@ -40,11 +40,11 @@ App({
                 iv: infoRes.iv, // 解密算法的向量
                 token: wx.getStorageSync("Authorization"),
               }).then(res => {
-                if (res.success) {
-                  that.globalData.userInfo = res.module.userInfo;
-                  that.globalData.Authorization = res.module.token;
+                if (res.code === 0) {
+                  that.globalData.userInfo = res.data.module.userInfo;
+                  that.globalData.Authorization = res.data.module.token;
                   // wx.setStorageSync("userInfo", res.module.userInfo);
-                  wx.setStorageSync("Authorization", res.module.token);
+                  wx.setStorageSync("Authorization", res.data.module.token);
                   console.log(111111)
                   if (callback) {
                     callback(res);

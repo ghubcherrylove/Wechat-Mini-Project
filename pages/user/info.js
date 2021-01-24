@@ -1,6 +1,7 @@
 let UserService = require('../../services/UserService')
 
-let {Dict} = require('../../utils/consts')
+let {Dict} = require('../../utils/consts');
+const util = require('../../utils/util');
 
 Page({
 
@@ -8,8 +9,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    realName: 'sss',
-    job: '',
     entity: {
       id: "",
       realName: "",
@@ -94,34 +93,34 @@ Page({
   // 表单提交
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    // if (!e.detail.value.realName) {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '请输入姓名',
-    //   })
-    //   return
-    // }
-    // if (!e.detail.value.height) {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '请输入身高',
-    //   })
-    //   return
-    // }
-    // if (!e.detail.value.weight) {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '请输入体重',
-    //   })
-    //   return
-    // }
-    // if (!e.detail.value.salary) {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '请输入月收入',
-    //   })
-    //   return
-    // }
+    if (!e.detail.value.realName) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入姓名',
+      })
+      return
+    }
+    if (!e.detail.value.height) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入身高',
+      })
+      return
+    }
+    if (!e.detail.value.weight) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入体重',
+      })
+      return
+    }
+    if (!e.detail.value.salary) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入月收入',
+      })
+      return
+    }
     // if (!e.detail.value.corporation) {
     //   wx.showToast({
     //     icon: 'none',
@@ -129,20 +128,20 @@ Page({
     //   })
     //   return
     // }
-    // if (!e.detail.value.phone) {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '请输入手机',
-    //   })
-    //   return
-    // }
-    // if (!e.detail.value.job) {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '请输入职业',
-    //   })
-    //   return
-    // }
+    if (!e.detail.value.phone) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入手机',
+      })
+      return
+    }
+    if (!e.detail.value.job) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入职业',
+      })
+      return
+    }
     // 保存到后端
     UserService.info(e.detail.value).then(res => {
       console.log('完善信息成功')
@@ -157,17 +156,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('options')
-    console.log(options)
     if (options.openId) {
       UserService.getUserInfoByOpenid(options.openId).then(res => {
         console.log('res')
         console.log(res)
-        this.setData({entity: res.userInfo})
-        console.log('this.data.entity')
-        console.log(this.data.entity)
-        this.setData({realName: res.userInfo.realName})
-        this.setData({job: res.userInfo.job})
+        if (res.code === 0) {
+          this.setData({entity: {...res.data.userInfo, birthDate: util.formatDateDay(res.data.userInfo.birthDate)}})
+        }
       })
     }
   },
