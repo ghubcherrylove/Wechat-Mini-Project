@@ -9,7 +9,7 @@
     <view wx:else>请升级微信版本</view>
 </view>
 <scroll-view scroll-y="true" bindscrolltolower="scrollToLower" class="timeline">
-  <view wx:if="{{!isHide}}" class="tweet-container" wx:for="{{userlist}}" wx:key="id" >
+  <view wx:if="{{!isHide}}" bindtap="navToPage" data-openid="{{item.openId}}" class="tweet-container" wx:for="{{userlist}}" wx:key="id" >
     <view class="top-container">
       <image src="{{item.avatorUrl}}"></image>                
       <view class="user-container">

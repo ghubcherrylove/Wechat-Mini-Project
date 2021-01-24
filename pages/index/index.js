@@ -36,6 +36,14 @@ Page({
   onReady() {
     // this.getUserList()
   },
+  // 跳转到详情页
+  navToPage(event) {
+    let openid = event.currentTarget.dataset.openid;
+    // 跳转到详情页
+    wx.navigateTo({
+      url: '../details/details' + '?openid=' + openid
+    })
+  },
   scrollToLower() {
     if (loadingMore || loadedEnd) return false
     loadingMore = true;
