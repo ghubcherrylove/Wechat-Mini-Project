@@ -87,7 +87,7 @@ Page({
   userButtonTap(e) {
     console.log('user button tap', e)
     wx.navigateTo({
-      url: '/pages/consultation/consultation?thisUserOpenid=' + e.currentTarget.dataset.data.userOpenid+'&otherUserOpenid=' + e.currentTarget.dataset.data.doctorOpenid+'&doctorName='+e.currentTarget.dataset.data.doctorName,
+      url: '/pages/chat/chat?thisUserOpenid=' + e.currentTarget.dataset.data.userOpenid+'&otherUserOpenid=' + e.currentTarget.dataset.data.doctorOpenid+'&doctorName='+e.currentTarget.dataset.data.doctorName,
     })
   },
   /**

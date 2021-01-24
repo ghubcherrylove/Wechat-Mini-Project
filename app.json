@@ -9,7 +9,8 @@
     "pages/settings/settings",
     "pages/about/about",
     "pages/profile/profile",
-    "pages/message/message"
+    "pages/message/message",
+    "pages/chat/chat"
   ],
   "window": {
     "backgroundTextStyle": "light",
