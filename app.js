@@ -10,6 +10,31 @@ App({
       that.globalData.userInfo = userStorageInfo;
     }
   },
+  ///上传单个文件
+  uploadFile (url, filePath = '', param) {
+    console.log('filePath')
+    console.log(filePath)
+    return new Promise((resolve, reject) => {
+      wx.uploadFile({
+        url: 'http://10.10.30.59:8000/api/' + url, //仅为示例，非真实的接口地址
+        filePath: filePath,
+        name: 'files',
+        formData: param,
+        header: {Authorization: wx.getStorageSync("Authorization"), 'content-type': 'multipart/form-data'},
+        success (res){ //上传成功
+          console.log(res)
+          //成功调用接口
+          resolve(JSON.parse(res.data));
+        },
+        fail(err){
+          console.log('保存图片失败!')
+          console.log(err)
+          wx.showToast({ title: '请求失败,请刷新后重试', icon: 'none' });
+          reject(err)
+        }
+      })
+    })
+  },
    // 公共登录动作 
    doLogin: function (callback = () => {}) {
     let that = this;

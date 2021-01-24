@@ -23,6 +23,15 @@
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell" data-route="../life/fileUpload" bindtap="navToPage">
+      <image class="wx-cell-icon" src="../../assets/language.png"></image>
+      <text class="wx-cell-text">上传生活照</text>
+      <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+    </view>
+  </view>
+
   <view class="wx-cells">
     <view class="wx-cell" data-route="../about/about" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/about.png"></image>

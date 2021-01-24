@@ -56,6 +56,15 @@
 
   <view class="wx-cells">
     <view class="wx-cell">
+      <text class="wx-cell-text">生活照</text>
+      <view class="wx-cell-right">
+        <image src="{{entity.lifePhotos}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="wx-cells">
+    <view class="wx-cell">
       <text class="wx-cell-text">星座</text>
       <view class="wx-cell-right">
         <picker bindchange="bindConstellationChange" name="constellation" value="{{entity.constellation}}" range="{{constellations}}">
