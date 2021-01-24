@@ -18,3 +18,8 @@ export function verify(data = {}) {
   return ajax({url: 'api/user/verify', data, method: 'POST'})
 }
 
+// 微信生活照上传文件
+export function fileUpload(data = {}) {
+  return ajax({url: 'api/user/life/fileUpload', data, method: 'POST', header: {'content-type': 'multipart/form-data'}})
+}
+

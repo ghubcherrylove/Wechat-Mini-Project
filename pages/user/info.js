@@ -16,6 +16,7 @@ Page({
       sex: 0,
       height: "",
       weight: "",
+      lifePhotos: "",
       education: 4,
       isMarried: 0,
       job: "",

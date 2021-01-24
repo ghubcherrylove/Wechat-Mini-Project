@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/login/login",
     "pages/user/info",
+    "pages/life/fileUpload",
     "pages/certification/certification",
     "pages/contacts/contacts",
     "pages/settings/settings",
@@ -16,6 +17,9 @@
     "navigationBarBackgroundColor": "#99ccff",
     "navigationBarTitleText": "一支小红花",
     "navigationBarTextStyle": "white"
+  },
+  "useExtendedLib": { 
+    "weui": true
   },
   "tabBar": {
     "color": "#929292",
