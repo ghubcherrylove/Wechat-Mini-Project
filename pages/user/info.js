@@ -8,6 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    realName: 'sss',
+    job: '',
     entity: {
       id: "",
       realName: "",
@@ -162,6 +164,10 @@ Page({
         console.log('res')
         console.log(res)
         this.setData({entity: res.userInfo})
+        console.log('this.data.entity')
+        console.log(this.data.entity)
+        this.setData({realName: res.userInfo.realName})
+        this.setData({job: res.userInfo.job})
       })
     }
   },

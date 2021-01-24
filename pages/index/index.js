@@ -39,6 +39,7 @@ Page({
   scrollToLower() {
     if (loadingMore || loadedEnd) return false
     loadingMore = true;
+    let that = this;
     this.getUserList({page: this.data.param.page++, size: this.data.param.size}, content => {
       let userlist = that.formatTimeline(content)
       this.setData({

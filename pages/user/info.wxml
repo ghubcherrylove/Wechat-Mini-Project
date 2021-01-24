@@ -3,8 +3,8 @@
     <view class="wx-cell">
       <text class="wx-cell-text">姓名</text>
       <view class="wx-cell-right">
-        <input name="realName" placeholder="请输入您的姓名" />
-        </view>
+        <input name="realName" value="{{entity.realName}}" placeholder="请输入您的姓名" />
+      </view>
     </view>
   </view>
 
@@ -40,7 +40,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">身高(cm)</text>
       <view class="wx-cell-right">
-        <input name="height" type="number" placeholder="请输入您的身高" />
+        <input name="height" value="{{entity.height}}" type="number" placeholder="请输入您的身高" />
         </view>
     </view>
   </view>
@@ -49,7 +49,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">体重(kg)</text>
       <view class="wx-cell-right">
-        <input name="weight" type="number" placeholder="请输入您的体重" />
+        <input name="weight" value="{{entity.weight}}" type="number" placeholder="请输入您的体重" />
         </view>
     </view>
   </view>
@@ -85,7 +85,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">月收入</text>
       <view class="wx-cell-right">
-        <input name="salary" type="number" placeholder="请输入您的收入" />
+        <input name="salary" value="{{entity.salary}}" type="number" placeholder="请输入您的收入" />
       </view>
     </view>
   </view>
@@ -107,7 +107,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">工作单位</text>
       <view class="wx-cell-right">
-        <input name="corporation" placeholder="请输入您的工作单位" />
+        <input name="corporation" value="{{entity.corporation}}" placeholder="请输入您的工作单位" />
         </view>
     </view>
   </view>
@@ -116,7 +116,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">手机</text>
       <view class="wx-cell-right">
-        <input name="phone" type="number" placeholder="请输入您的手机" />
+        <input name="phone" value="{{entity.phone}}" type="number" placeholder="请输入您的手机" />
         </view>
     </view>
   </view>
@@ -125,7 +125,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">职业</text>
       <view class="wx-cell-right">
-        <input name="job" placeholder="请输入您的职业" />
+        <input name="job" value="{{entity.job}}" placeholder="请输入您的职业" />
       </view>
     </view>
   </view>
@@ -134,7 +134,7 @@
     <view class="wx-cell">
       <text class="wx-cell-text">微信账号</text>
       <view class="wx-cell-right">
-        <input name="wechatAccount" placeholder="请输入您的职业" />
+        <input name="wechatAccount" value="{{entity.wechatAccount}}" placeholder="请输入您的微信账号" />
       </view>
     </view>
   </view>

@@ -12,7 +12,7 @@
     "minified": true,
     "newFeature": false,
     "coverView": true,
-    "nodeModules": false,
+    "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
@@ -81,6 +81,7 @@
         {
           "name": "完善信息",
           "pathName": "pages/user/info",
+          "query": "",
           "scene": null
         }
       ]
