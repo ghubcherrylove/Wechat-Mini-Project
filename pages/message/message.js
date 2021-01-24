@@ -1,85 +1,66 @@
-let ajax = require('../../network/ajax')
-
-const answers = [
-    'Yes!',
-    'No',
-    'Hm...',
-    'I am not sure',
-    'And what about you?',
-    'May be ;)',
-    'Lorem ipsum dolor sit amet, consectetur',
-    'What?',
-    'Are you sure?',
-    'Of course',
-    'Need to think about it',
-    'Amazing!!!'
-]
-let answerTimeout
-
-// TODO 获取消息、发送消息之后需要滚动到底部
-// 似乎 scroll-view 很多问题 
-
+// pages/message/message.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    userName: '',
-    messages: [],
-    inputValue: '',
-    inputContent: {}
+
   },
-  onLoad(options) {
-    let name = options.name || 'HiApp'
-    this.setData({
-      userName: name
-    })
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
   },
-  onReady() {
-    wx.setNavigationBarTitle({
-      title: this.data.userName
-    })
-    this.getMessage()
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
-  bindChange(e) {
-    this.data.inputContent[e.currentTarget.id] = e.detail.value
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
   },
-  getMessage() {
-    wx.showToast({
-      title: 'loading...',
-      icon: 'loading'
-    })
-    ajax({
-        url: 'message.json',
-        success: res => {
-          this.setData({
-            messages: res.data
-          })
-        },
-        complete: _ => {
-          wx.hideToast()
-        }
-    })
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
   },
-  sendMessage() {
-    this.setData({
-      messages: [...this.data.messages, {
-        text: this.data.inputContent.message,
-        from: 'sent'
-      }]
-    })
-    this.data.inputValue = ''
-    setTimeout(() => {
-      this.autoAnswer()
-    }, 1000)
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
   },
-  autoAnswer() {
-    answerTimeout && clearTimeout(answerTimeout)
-    answerTimeout = setTimeout(_ => {
-      let message = {
-        from: 'received',
-        text: answers[Math.floor(Math.random() * answers.length)]
-      }
-      this.setData({
-        messages: [...this.data.messages, message]
-      })
-    }, 1000)
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })
