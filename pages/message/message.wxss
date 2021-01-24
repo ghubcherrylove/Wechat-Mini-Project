@@ -1,1 +1,67 @@
-/* pages/message/message.wxss */
+/* pages/exchange/exchange.wxss */
+.tab {
+  width: 50%;
+  text-align: center;
+  padding: 10rpx 0;
+}
+ 
+.top-tab-swiper {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  zoom: 1;
+}
+ 
+.top-tab-swiper:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+ 
+.tab-borer {
+  border-bottom: 1px solid #67C23A;
+  color: #67C23A;
+}
+ 
+.swiper {
+  width: 100%;
+}
+ 
+.swiper-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.message{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  box-shadow:0rpx 2rpx 5rpx 5rpx rgba(85, 85, 85, 0.10);
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.message-info{
+  display: flex;
+  width: 78%;
+  justify-content: space-between;
+}
+.message-head{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+}
+.message-right{
+  display: flex;
+  flex-direction: column;
+  font-size: 30rpx;
+}
+.new-message{
+  font-size: 24rpx;
+  color: #AAAAAA;
+  margin-top: 10rpx;
+}
+.new-message-time{
+  color: #CCCCCC;
+  font-size: 26rpx;
+}
