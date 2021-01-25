@@ -85,9 +85,11 @@ Page({
     })
   },
   userButtonTap(e) {
-    console.log('user button tap', e)
+    console.log('user button tap--------------', e)
+    let userInfo = wx.getStorageSync("userInfo");
+    let openId = userInfo.openId;
     wx.navigateTo({
-      url: '/pages/chat/chat?thisUserOpenid=' + e.currentTarget.dataset.data.userOpenid+'&otherUserOpenid=' + e.currentTarget.dataset.data.doctorOpenid+'&doctorName='+e.currentTarget.dataset.data.doctorName,
+      url: '/pages/chat/chat?thisUserOpenid=' +openId+'&otherUserOpenid=' + e.currentTarget.dataset.data.doctorOpenid+'&doctorName='+e.currentTarget.dataset.data.doctorName,
     })
   },
   /**

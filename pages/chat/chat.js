@@ -6,7 +6,7 @@ var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
 var socketOpen = false;
 var frameBuffer_Data, session, SocketTask;
-var url = 'ws://localhost:8000/websocket/';
+var url = 'ws://localhost:8000/webSocket/';
 var upload_url ='http://localhost:8000/file/upload'
 import request from '../../utils/request'
 /**
@@ -14,7 +14,6 @@ import request from '../../utils/request'
  */
 function initData(that) {
   inputVal = '';
-
   msgList = [
     {
       speaker: 'others',
@@ -58,7 +57,6 @@ Page({
     this.data.otherUserOpenid = options.otherUserOpenid;
     this.data.thisUserOpenid = options.thisUserOpenid;
     console.log(options);
-    
     this.setData({
       otherUserOpenid: options.otherUserOpenid,
       thisUserOpenid: options.thisUserOpenid
@@ -78,9 +76,7 @@ Page({
     let authnizatin =  wx.getStorageSync("Authorization");
     request.get('/api/chat/loadMessage',{toOpenId: this.data.otherUserOpenid},{Authorization:authnizatin}).then(res => {
       res.data.data.forEach((item) => {
-        console.log(11111111111)
-        console.log(item)
-        if (this.data.thisUserOpenid == item.sender) {
+        if (this.data.thisUserOpenid == item.senderId) {//对方说的
           this.setData({
             ['msgList['+i+']'] : {
               speaker: 'our',
@@ -88,7 +84,7 @@ Page({
               content: item.content
             }
           })
-        } else {
+        } else {//自己说的
           this.setData({
             ['msgList['+i+']'] : {
               speaker: 'others',
@@ -120,11 +116,10 @@ Page({
       socketOpen = false
     })
     SocketTask.onMessage(onMessage => {
-      console.log(onMessage);
       msgList.push({
         speaker: 'others',
         contentType: 'text',
-        content: onMessage.data
+        content: JSON.parse(onMessage.data).data
       })
       this.setData({
         msgList
@@ -133,9 +128,10 @@ Page({
     })
   },
   webSocket: function () {
+    let auth =  wx.getStorageSync("Authorization");
     // 创建Socket
     SocketTask = wx.connectSocket({
-      url: url + this.data.thisUserOpenid + '/' + this.data.otherUserOpenid,
+      url: url + this.data.thisUserOpenid+"?"+"Authorization="+auth,
       data: 'data',
       header: {
         'content-type': 'application/json'
@@ -198,8 +194,9 @@ Page({
   submitTo: function () {
     if (socketOpen) {
       console.log('test');
+      var message = {"toUserId":this.data.otherUserOpenid,"senderOpenId":this.data.thisUserOpenid,"data":this.data.inputVal,"cmd":"txt"}
       // 如果打开了socket就发送数据给服务器
-      sendSocketMessage(this.data.inputVal)
+      sendSocketMessage(message)
     }
     msgList.push({
       speaker: 'our',
@@ -253,6 +250,7 @@ Page({
     if (socketOpen) {
       console.log('test');
       // 如果打开了socket就发送数据给服务器
+      var content = this.data.inputVal
       sendSocketMessage(this.data.inputVal)
     }
     msgList.push({

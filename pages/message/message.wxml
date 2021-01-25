@@ -6,7 +6,7 @@
   <swiper-item catchtouchmove="stopTouchMove">
    <view class='swiper-con'>
     <view class="message" wx:for="{{interactionList}}" wx:for-item="item" wx:key="index" bindtap="userButtonTap" data-data='{{item}}'>
-      <image class="message-head" src="../../images/noHead.jpg"></image>
+      <image class="message-head" src="../../assets/noHead.jpg"></image>
       <view class="message-info">
        <view class="message-right">
          <text class="doctor-name">{{item.doctorName}}</text>
@@ -22,7 +22,7 @@
   <swiper-item catchtouchmove="stopTouchMove">
     <view class='swiper-con'>
     <view class="message" wx:for="{{4}}" wx:key="index">
-      <image class="message-head" src="../../images/noHead.jpg"></image>
+      <image class="message-head" src="../../assets/noHead.jpg"></image>
       <view class="message-info">
        <view class="message-right">
          <text class="doctor-name">智商治疗群</text>
