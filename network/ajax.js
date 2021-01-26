@@ -55,12 +55,16 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
               reject(res.data)
             }
           } else {
-            if (res.statusCode === 401) {}
             let message = codeMessage[res.statusCode];
             wx.showToast({
               title: message || '请求失败!'
             })
-            reject(res.data)
+            if (res.statusCode === 401) {
+              wx.navigateTo({
+                url: '/pages/login/login',
+              })
+            }
+            // reject(res.data)
           }
         },
         fail: function(fail) {
