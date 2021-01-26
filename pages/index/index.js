@@ -29,11 +29,11 @@ Page({
     if (app.globalData.userInfo) {
       // that.getUserList(this.data.param)
     } else {
-      this.setData({isHide: true})
+      // this.setData({isHide: true})
     }
   },
   onShow() {
-    this.setData({isHide: false})
+    // this.setData({isHide: false})
     this.getUserList(this.data.param)
   },
   onReady() {
@@ -51,7 +51,7 @@ Page({
     if (loadingMore || loadedEnd) return false
     loadingMore = true;
     let that = this;
-    this.getUserList({page: this.data.param.page++, size: this.data.param.size}, data => {
+    this.getUserList({page: ++this.data.param.page, size: this.data.param.size}, data => {
       let userlist = this.formatTimeline(data.content)
       this.setData({
         userlist: [...this.data.userlist, ...userlist]
@@ -69,8 +69,10 @@ Page({
       if (callback) {
         callback(data)
       } else {
-        let userlist = this.formatTimeline(data.content)
-        this.setData({userlist: userlist})
+        let userlist = this.formatTimeline(data.content);
+        this.setData({
+          userlist: [...this.data.userlist, ...userlist]
+        })
       }
     }
   },
@@ -81,10 +83,10 @@ Page({
       // 获取到用户的信息了，打印到控制台上看下
       let userInfo = res.detail.userInfo;
       app.doLogin(res => {
-        console.log('登录成功')
-        console.log(res)
         if (res.code === 0) { // 成功
-          this.setData({isHide: false})
+          console.log('登录成功')
+          console.log(res)
+          // this.setData({isHide: false})
           wx.setStorageSync("Authorization", res.data.module.token);
           wx.setStorageSync("userInfo", res.data.module.userInfo);
           this.getUserList(this.data.param)
@@ -109,10 +111,8 @@ Page({
   },
   formatTimeline(items = []) {
     items.forEach(item => {
-      // item.time = util.formatDateTime(item.time)
       item.salary = util.formatSalary(item.salary)
       item.birthDate = util.formatDateYear(item.birthDate)
-      // item.education = Dict.getText(item.education, Dict.store.EDUCATIONS)
       return item
     })
     return items
