@@ -52,32 +52,25 @@ Page({
     loadingMore = true;
     let that = this;
     this.getUserList({page: this.data.param.page++, size: this.data.param.size}, data => {
-      let userlist = that.formatTimeline(data.content)
+      let userlist = this.formatTimeline(data.content)
       this.setData({
         userlist: [...this.data.userlist, ...userlist]
       })
     })
   },
   async getUserList(query = {page:0, size: 10}, callback) {
-    let that = this;
     wx.showToast({
       title: 'loading...',
       icon: 'loading'
     })
-    // UserService.list(this.data.param).then(data => {
-    //   let userlist = this.formatTimeline(res.content)
-    //   this.setData({userlist: userlist})
-    //   if (callback) {
-    //     callback(res);
-    //   }
-    // })
     // 第一个data参数 第二个是query查询参数 page:0 size: 10
     let {code = 1, data = {}, msg = ''} = await UserService.list(this.data.param);
     if (code === 0) { // 成功
       if (callback) {
         callback(data)
       } else {
-        this.setData({userlist: data.content})
+        let userlist = this.formatTimeline(data.content)
+        this.setData({userlist: userlist})
       }
     }
   },
@@ -116,7 +109,7 @@ Page({
   },
   formatTimeline(items = []) {
     items.forEach(item => {
-      item.time = util.formatDateTime(item.time)
+      // item.time = util.formatDateTime(item.time)
       item.salary = util.formatSalary(item.salary)
       item.birthDate = util.formatDateYear(item.birthDate)
       // item.education = Dict.getText(item.education, Dict.store.EDUCATIONS)

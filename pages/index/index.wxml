@@ -13,8 +13,8 @@
     <view class="top-container">
       <image class="image-avatorUrl" src="{{item.avatorUrl || userInfo.avatorUrl}}"></image>                
       <view class="user-container">
-        <text class="card-name">{{item.job || '无'}}</text>
-        <text class="card-time">{{item.birthDate}} | {{item.height || '0'}} cm | {{item.weight || '0'}} kg | {{EDUCATIONS[item.education] || ''}} | {{item.salary || 0}} | {{BUY_CARS[item.isBuyCar] || '无'}} | {{BUY_HOUSES[item.isBuyHouse] || '无'}} | {{MARRIEDS[item.isMarried] || '无'}}</text>
+        <text class="card-name">{{item.job || '未知'}}</text>
+        <text class="card-time">{{item.birthDate || '未知'}} | {{item.height || '0'}} cm | {{item.weight || '0'}} kg | {{EDUCATIONS[item.education] || '未知'}} | {{item.salary || 0}} | {{BUY_CARS[item.isBuyCar] || '未知'}} | {{BUY_HOUSES[item.isBuyHouse] || '未知'}} | {{MARRIEDS[item.isMarried] || '未知'}}</text>
         <text class="card-time">{{'兴趣爱好:' + (item.hobby || '无')}}</text>
         <text class="card-time">{{'个性签名:' + (item.selfIntroduction || '无')}}</text>
       </view>
