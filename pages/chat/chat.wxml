@@ -7,10 +7,10 @@
       <!--  发出（左） -->
       <view wx:if='{{item.speaker=="others"}}' id='msg-{{index}}' class="others">
         <view>
-          <image class="head-img" src='../../images/noHead.jpg'></image>
+          <image class="head-img" src='../../assets/noHead.jpg'></image>
         </view>
         <view class="other-tri triangle">
-          <image src='../../images/left_msg.png' mode='widthFix'></image>
+          <image src='../../assets/left_msg.png' mode='widthFix'></image>
         </view>
         <view class='left-msg'>{{item.content}}</view>
       </view>
@@ -19,7 +19,7 @@
       <view wx:else id='msg-{{index}}' class="our">
         <view class='right-msg'>{{item.content}}</view>
         <view class="our-tri triangle">
-          <image  src='../../images/right_msg.png' mode='widthFix'></image>
+          <image  src='../../assets/right_msg.png' mode='widthFix'></image>
         </view>
         <view>
           <image class="head-img" src='{{cusHeadIcon}}'></image>
@@ -33,7 +33,7 @@
   </scroll-view>
 
   <view class='input-room' style='bottom: {{inputBottom}}'>
-    <image style='width: 8%; margin-left: 3.2%;' src='../../images/pic_icon.png' mode='widthFix' bindtap="upImg"></image>
+    <image style='width: 8%; margin-left: 3.2%;' src='../../assets/pic_icon.png' mode='widthFix' bindtap="upImg"></image>
     <input bindconfirm='sendClick' adjust-position='{{false}}' bindinput="getUserInput" value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur'></input>
     <button bindtap="submitTo" class='user_input_text' style="margin: 0 2% 0 3.2%;width: 22%;">发送</button>
   </view>

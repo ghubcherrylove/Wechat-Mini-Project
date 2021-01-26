@@ -67,16 +67,16 @@ Page({
     let openId = userInfo.openId;
     let authnizatin =  wx.getStorageSync("Authorization");
     request.get('/api/chat/'+openId, {}, {Authorization:authnizatin}).then(res => {
-      console.log(res);
+      // console.log(res);
       res.data.data.forEach((item) => {
-        console.log(item.openId)
+        // console.log(item)
         this.setData({
           ['interactionList['+i+']'] : {
-            doctorOpenid: item.openId,
+            doctorOpenid: item.chatWithId,
             userOpenid: item.openId,
             doctorName: item.nickName,
-            message: item.openId,
-            date: item.openId,
+            message: item.content,
+            date: item.createTime,
             avatarUrl: item.avatarUrl
           }
         })
@@ -85,9 +85,13 @@ Page({
     })
   },
   userButtonTap(e) {
-    console.log('user button tap', e)
+    console.log('user button tap--------------', e)
+    console.log( e.currentTarget.dataset.data.doctorOpenid)
+    console.log(e.currentTarget.dataset.data.doctorName)
+    let userInfo = wx.getStorageSync("userInfo");
+    let openId = userInfo.openId;
     wx.navigateTo({
-      url: '/pages/chat/chat?thisUserOpenid=' + e.currentTarget.dataset.data.userOpenid+'&otherUserOpenid=' + e.currentTarget.dataset.data.doctorOpenid+'&doctorName='+e.currentTarget.dataset.data.doctorName,
+      url: '/pages/chat/chat?thisUserOpenid=' +openId+'&otherUserOpenid=' + e.currentTarget.dataset.data.doctorOpenid+'&doctorName='+e.currentTarget.dataset.data.doctorName,
     })
   },
   /**
