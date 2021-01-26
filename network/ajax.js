@@ -46,18 +46,7 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
           // res = {cookies: [], data: {code: 0, msg: '', data: {}}, errMsg: '', header: {}, statusCode: 200}
           if (res.statusCode >= 200 && res.statusCode <= 300) { // http协议的状态码
             // http://10.10.30.59:8000/     用以下
-            // if (res.data.code === 0) { // 这是与后端定义的成功标识
-            //   resolve(res.data)
-            // } else {
-            //   let message = res.data.msg;
-            //   wx.showToast({
-            //     title: message || '请求失败!'
-            //   })
-            //   reject(res.data)
-            // }
-
-            // https://aicloud.thingsmatrix.co/   用以下
-            if (res.data.success) { // 这是与后端定义的成功标识
+            if (res.data.code === 0) { // 这是与后端定义的成功标识
               resolve(res.data)
             } else {
               let message = res.data.msg;
@@ -66,6 +55,17 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
               })
               reject(res.data)
             }
+
+            // https://aicloud.thingsmatrix.co/   用以下
+            // if (res.data.success) { // 这是与后端定义的成功标识
+            //   resolve(res.data)
+            // } else {
+            //   let message = res.data.msg;
+            //   wx.showToast({
+            //     title: message || '请求失败!'
+            //   })
+            //   reject(res.data)
+            // }
           } else {
             if (res.statusCode === 401) {}
             let message = codeMessage[res.statusCode];
