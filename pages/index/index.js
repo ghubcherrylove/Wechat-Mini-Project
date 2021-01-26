@@ -2,7 +2,6 @@ let app = getApp()
 let util = require('../../utils/util')
 let UserService = require('../../services/UserService')
 let {Dict} = require('../../utils/consts')
-let ajax = require('../../network/ajax')
 
 let refreshing = false,
   refreshed = false,

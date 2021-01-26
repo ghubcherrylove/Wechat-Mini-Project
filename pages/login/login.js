@@ -10,36 +10,43 @@ Page({
   onLoad: function (options) {
     var that = this;
     //查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-          console.log("用户授权了");
-        } else {
-          //用户没有授权
-          console.log("用户没有授权");
-        }
-      }
-    });
+    // wx.getSetting({
+    //   success: function (res) {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       console.log("用户授权了");
+    //     } else {
+    //       //用户没有授权
+    //       console.log("用户没有授权");
+    //     }
+    //   }
+    // });
   },
   bindGetUserInfo: function (res) {
     if (res.detail.userInfo) {
       //用户按了允许授权按钮
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
-      console.log("用户的信息如下：");
-      console.log(res.detail.userInfo);
+      // console.log("用户的信息如下：");
+      // console.log(res.detail.userInfo);
       let userInfo =  res.detail.userInfo;
-      //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
-      //       that.setData({
-      //         isHide: false
-      //       });
       wx.setStorage({
         data: userInfo,
         key: 'userInfo',
       })
-      // wx.navigateBack({
-      //   delta: 0,
-      // })
+      app.doLogin(res => {
+        console.log('----res1111111111---------')
+        console.log(res)
+        // errCode: "ok"
+        // errMsg: null
+        // success: true
+        // module: {}
+        // https://aicloud.thingsmatrix.co/   用以下
+        if (res.success) {// 登录成功，跳转到index首页
+          wx.switchTab({
+            url: '../../pages/index/index',
+          })
+        }
+      })
     } else {
       //用户按了拒绝按钮
       wx.showModal({

@@ -1,4 +1,23 @@
-<form catchsubmit="formSubmit" catchreset="formReset">
+<view>
+  <view class="page__bd">
+    <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+      <mp-cells title="认证信息" footer="请务必填写真实信息，以上信息仅作当前系统认证使用">
+        <mp-cell prop="realName" title="姓名">
+          <input bindinput="formInputChange" data-field="realName" class="weui-input" placeholder="请输入姓名" />
+        </mp-cell>
+        <mp-cell prop="idCard" title="身份证号">
+          <input bindinput="formInputChange" type="number" data-field="idCard" class="weui-input" placeholder="请输入身份证号" />
+        </mp-cell>
+      </mp-cells>
+    </mp-form>
+  </view>
+  <view class="weui-btn-area">
+    <button class="weui-btn" type="primary" style="background:#99ccff" bindtap="submitForm">确定</button>
+  </view>
+</view>
+
+
+<!-- <form catchsubmit="formSubmit" catchreset="formReset">
   <view class="page-section">
     <view class="page-section-title">姓名</view>
     <view class="weui-cells weui-cells_after-title">
@@ -9,16 +28,6 @@
       </view>
     </view>
   </view>
-  <!-- <view class="page-section">
-    <view class="page-section-title">手机号</view>
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__bd" style="margin: 30rpx 0">
-          <input class="weui-input" name="phone" placeholder="请输入您的手机号" />
-        </view>
-      </view>
-    </view>
-  </view> -->
   <view class="page-section">
     <view class="page-section-title">身份证号</view>
     <view class="weui-cells weui-cells_after-title">
@@ -31,6 +40,5 @@
   </view>
   <view class="btn-area button-sp-area">
     <button style="margin: 100rpx 0; background: #ff9630" type="primary" formType="submit">提交</button>
-    <!-- <button style="margin: 30rpx 0" formType="reset">Reset</button> -->
   </view>
-</form>
+</form> -->

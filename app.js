@@ -65,18 +65,37 @@ App({
                 iv: infoRes.iv, // 解密算法的向量
                 token: wx.getStorageSync("Authorization"),
               }).then(res => {
-                if (res.code === 0) {
-                  that.globalData.userInfo = res.data.module.userInfo;
-                  that.globalData.Authorization = res.data.module.token;
+                console.log('app doLogin')
+                console.log(res)
+                // http://10.10.30.59:8000/     用以下
+                // if (res.code === 0) {
+                //   that.globalData.userInfo = res.data.module.userInfo;
+                //   that.globalData.Authorization = res.data.module.token;
+                //   // wx.setStorageSync("userInfo", res.module.userInfo);
+                //   wx.setStorageSync("Authorization", res.data.module.token);
+                //   console.log(111111)
+                //   if (callback) {
+                //     callback(res);
+                //   }
+                // } else {
+                //   that.showInfo(res.message);
+                // }
+
+                // https://aicloud.thingsmatrix.co/   用以下
+                if (res.success) {
+                  that.globalData.userInfo = res.module.userInfo;
+                  that.globalData.Authorization = res.module.token;
                   // wx.setStorageSync("userInfo", res.module.userInfo);
-                  wx.setStorageSync("Authorization", res.data.module.token);
-                  console.log(111111)
+                  wx.setStorageSync("Authorization", res.module.token);
                   if (callback) {
                     callback(res);
                   }
                 } else {
                   that.showInfo(res.message);
                 }
+              }, err => {
+                console.log('app login err')
+                console.log(err)
               })
             },
             fail: function (error) {

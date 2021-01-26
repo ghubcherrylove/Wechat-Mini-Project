@@ -1,4 +1,3 @@
-
 let UserService = require('../../services/UserService')
 
 Page({
@@ -7,7 +6,48 @@ Page({
    * 页面的初始数据
    */
   data: {
+    error: {},
+    formData: {
 
+    },
+    rules: [
+      {
+        name: 'realName',
+        rules: {required: true, message: '姓名必填'},
+      },
+      {
+        name: 'idCard',
+        rules: {required: true, message: '身份证号必填'},
+      }
+    ]
+  },
+  formInputChange(e) {
+    const {field} = e.currentTarget.dataset
+    this.setData({
+        [`formData.${field}`]: e.detail.value
+    })
+  },
+  submitForm() {
+    this.selectComponent('#form').validate((valid, errors) => {
+      console.log('valid', valid, errors)
+      if (!valid) {
+        const firstError = Object.keys(errors)
+        if (firstError.length) {
+          wx.showToast({
+            title: errors[firstError[0]].message || '校验不通过',
+            icon: 'error'
+          })
+        }
+      } else {
+        console.log('formdata')
+        console.log(this.data.formData)
+        UserService.verify(this.data.formData).then(res => {
+          wx.switchTab({
+            url: '/pages/settings/settings',
+          })
+        })
+      }
+    })
   },
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)

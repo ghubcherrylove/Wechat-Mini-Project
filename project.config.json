@@ -87,6 +87,24 @@
         {
           "name": "pages/life/fileUpload",
           "pathName": "pages/life/fileUpload",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/certification/certification",
+          "pathName": "pages/certification/certification",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/user/info",
+          "pathName": "pages/user/info",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/info/info",
+          "pathName": "pages/info/info",
           "scene": null
         }
       ]

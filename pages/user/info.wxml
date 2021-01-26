@@ -28,8 +28,8 @@
       <view class="weui-cell__bd" style="float: right;">
           <picker mode="date" name="birthDate" value="{{entity.birthDate}}" start="1980-01-01" end="2005-01-01" bindchange="bindDateChange">
             <view class="picker">
-              {{entity.birthDate}}
-              <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+              {{entity.birthDate || '2021-01-01'}}
+              <image class="wx-cell-arrow" alt="图片加载失败或没有图片" src="../../assets/right-gray.png"></image>
             </view>
           </picker>
         </view>

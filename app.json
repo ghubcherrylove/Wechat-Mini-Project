@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/login/login",
     "pages/user/info",
+    "pages/info/info",
     "pages/details/details",
     "pages/life/fileUpload",
     "pages/certification/certification",
@@ -24,7 +25,7 @@
   },
   "tabBar": {
     "color": "#929292",
-    "selectedColor": "#ff9630",
+    "selectedColor": "#99ccff",
     "backgroundColor": "#f7f7f8",
     "borderStyle": "white",
     "list": [
