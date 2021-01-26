@@ -67,12 +67,12 @@ Page({
     let openId = userInfo.openId;
     let authnizatin =  wx.getStorageSync("Authorization");
     request.get('/api/chat/'+openId, {}, {Authorization:authnizatin}).then(res => {
-      console.log(res);
+      // console.log(res);
       res.data.data.forEach((item) => {
         // console.log(item)
         this.setData({
           ['interactionList['+i+']'] : {
-            doctorOpenid: item.openId,
+            doctorOpenid: item.chatWithId,
             userOpenid: item.openId,
             doctorName: item.nickName,
             message: item.content,
@@ -86,6 +86,8 @@ Page({
   },
   userButtonTap(e) {
     console.log('user button tap--------------', e)
+    console.log( e.currentTarget.dataset.data.doctorOpenid)
+    console.log(e.currentTarget.dataset.data.doctorName)
     let userInfo = wx.getStorageSync("userInfo");
     let openId = userInfo.openId;
     wx.navigateTo({

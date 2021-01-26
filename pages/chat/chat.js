@@ -76,7 +76,7 @@ Page({
     let authnizatin =  wx.getStorageSync("Authorization");
     request.get('/api/chat/loadMessage',{toOpenId: this.data.otherUserOpenid},{Authorization:authnizatin}).then(res => {
       res.data.data.forEach((item) => {
-        console.log(item)
+        // console.log(item)
         if (this.data.thisUserOpenid == item.senderOpenId) {//对方说的
           this.setData({
             ['msgList['+i+']'] : {
