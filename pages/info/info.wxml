@@ -34,7 +34,7 @@
             placeholder="请输入您的体重" />
         </mp-cell>
         <mp-cell prop="" title="生活照">
-          <image src="{{entity.lifePhotos}}"></image>
+          <image class="image-lifePhotos" src="{{entity.lifePhotos}}"></image>
         </mp-cell>
         <mp-cell prop="constellation" title="星座">
           <view class="wx-cell-right">
@@ -74,7 +74,7 @@
         </mp-cell>
       </mp-cells>
 
-      <mp-cells>
+      <mp-cells footer="为了保护您的隐私，以上信息仅做系统使用">
         <mp-cell prop="isBuyCar" title="是否有车">
           <view class="wx-cell-right">
             <picker bindchange="bindIsBuyCarChange" name="isBuyCar" value="{{entity.isBuyCar}}" range="{{cars}}">

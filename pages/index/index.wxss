@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.image-avatorUrl {
+  width: 100%;
+}
+
 /* 授权相关样式 */
 .headView {
   margin: 90rpx 50rpx 90rpx 50rpx;

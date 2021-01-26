@@ -3,23 +3,23 @@
     <mp-cells ext-class="my-cells" title="基本信息">
       <mp-cell>
         <view>姓名</view>
-        <view slot="footer">{{entity.realName}}</view>
+        <view slot="footer">{{entity.realName || ''}}</view>
       </mp-cell>
       <mp-cell>
         <view>性别</view>
-        <view slot="footer">{{entity.sex}}</view>
+        <view slot="footer">{{entity.sex || ''}}</view>
       </mp-cell>
       <mp-cell>
         <view>出生日期</view>
-        <view slot="footer">{{entity.birthDate}}</view>
+        <view slot="footer">{{entity.birthDate || ''}}</view>
       </mp-cell>
       <mp-cell>
         <view>身高(cm)</view>
-        <view slot="footer">{{entity.height}}</view>
+        <view slot="footer">{{entity.height || ''}}</view>
       </mp-cell>
       <mp-cell>
         <view>体重(kg)</view>
-        <view slot="footer">{{entity.weight}}</view>
+        <view slot="footer">{{entity.weight || ''}}</view>
       </mp-cell>
       <mp-cell>
         <view>学历</view>
@@ -27,27 +27,15 @@
       </mp-cell>
       <mp-cell>
         <view>月收入</view>
-        <view slot="footer">{{entity.salary}}</view>
+        <view slot="footer">{{entity.salary || ''}}</view>
       </mp-cell>
     </mp-cells>
   </view>
   <view class="page__bd">
-    <mp-cells ext-class="my-cells" title="兴趣爱好详情">
+    <mp-cells ext-class="my-cells" title="其它详情">
       <mp-cell>
         <view>生活照</view>
         <image src="{{entity.lifePhotos}}"></image>
-      </mp-cell>
-      <mp-cell>
-        <view>星座</view>
-        <view slot="footer">{{constellations[entity.constellation]}}</view>
-      </mp-cell>
-      <mp-cell>
-        <view>工作单位</view>
-        <view slot="footer">{{entity.corporation}}</view>
-      </mp-cell>
-      <mp-cell>
-        <view>职业</view>
-        <view slot="footer">{{entity.job}}</view>
       </mp-cell>
       <mp-cell>
         <view>是否有车</view>
@@ -62,8 +50,24 @@
         <view slot="footer">{{marrieds[entity.isMarried]}}</view>
       </mp-cell>
       <mp-cell>
-        <view>是否有房</view>
-        <view slot="footer">{{BUY_HOUSES[entity.isBuyHouse]}}</view>
+        <view>职业</view>
+        <view slot="footer">{{entity.job || ''}}</view>
+      </mp-cell>
+      <mp-cell>
+        <view>星座</view>
+        <view slot="footer">{{constellations[entity.constellation]}}</view>
+      </mp-cell>
+      <mp-cell>
+        <view>工作单位</view>
+        <view slot="footer">{{entity.corporation || ''}}</view>
+      </mp-cell>
+      <mp-cell>
+        <view>爱好</view>
+        <view slot="footer">{{entity.skill || ''}}</view>
+      </mp-cell>
+      <mp-cell>
+        <view>个性签名</view>
+        <view slot="footer">{{entity.selfIntroduction || ''}}</view>
       </mp-cell>
     </mp-cells>
   </view>

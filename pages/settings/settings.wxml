@@ -10,7 +10,7 @@
     </view>
   </view>
   <view class="wx-cells">
-    <view class="wx-cell" data-route="../user/info" bindtap="navToPage">
+    <view class="wx-cell" data-route="../info/info" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/feedback.png"></image>
       <text class="wx-cell-text">完善信息</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
@@ -40,7 +40,7 @@
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>
-  <view class="wx-cells" wx:if="{{!userInfo.gender}}">
+  <!-- <view class="wx-cells" wx:if="{{!userInfo.gender}}">
     <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
-  </view>
+  </view> -->
 </view>

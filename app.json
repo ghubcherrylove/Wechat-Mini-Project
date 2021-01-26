@@ -16,7 +16,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#99ccff",
+    "navigationBarBackgroundColor": "#ff9630",
     "navigationBarTitleText": "一支小红花",
     "navigationBarTextStyle": "white"
   },
@@ -25,27 +25,27 @@
   },
   "tabBar": {
     "color": "#929292",
-    "selectedColor": "#99ccff",
+    "selectedColor": "#ff9630",
     "backgroundColor": "#f7f7f8",
     "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "遇见",
-        "iconPath": "assets/seeyou.png",
-        "selectedIconPath": "assets/seeyou.png"
+        "iconPath": "assets/home-outline.png",
+        "selectedIconPath": "assets/home-selected.png"
       },
       {
         "pagePath": "pages/message/message",
         "text": "消息",
-        "iconPath": "assets/message.png",
-        "selectedIconPath": "assets/message.png"
+        "iconPath": "assets/contacts-outline.png",
+        "selectedIconPath": "assets/contacts-selected.png"
       },
       {
         "pagePath": "pages/settings/settings",
         "text": "我的",
-        "iconPath": "assets/person2.png",
-        "selectedIconPath": "assets/person2.png"
+        "iconPath": "assets/settings-outline.png",
+        "selectedIconPath": "assets/settings-selected.png"
       }
     ]
   },

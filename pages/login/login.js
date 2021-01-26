@@ -28,20 +28,15 @@ Page({
       // 获取到用户的信息了，打印到控制台上看下
       // console.log("用户的信息如下：");
       // console.log(res.detail.userInfo);
-      let userInfo =  res.detail.userInfo;
-      wx.setStorage({
-        data: userInfo,
-        key: 'userInfo',
-      })
+      // let userInfo =  res.detail.userInfo;
+      // wx.setStorage({
+      //   data: userInfo,
+      //   key: 'userInfo',
+      // })
       app.doLogin(res => {
-        console.log('----res1111111111---------')
+        console.log('----登录成功，跳转到index首页---------')
         console.log(res)
-        // errCode: "ok"
-        // errMsg: null
-        // success: true
-        // module: {}
-        // https://aicloud.thingsmatrix.co/   用以下
-        if (res.success) {// 登录成功，跳转到index首页
+        if (res.code === 0) {// 登录成功，跳转到index首页
           wx.switchTab({
             url: '../../pages/index/index',
           })

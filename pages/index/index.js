@@ -27,10 +27,14 @@ Page({
   onLoad() {
     let that = this;
     if (app.globalData.userInfo) {
-      that.getUserList(this.data.param)
+      // that.getUserList(this.data.param)
     } else {
       this.setData({isHide: true})
     }
+  },
+  onShow() {
+    this.setData({isHide: false})
+    this.getUserList(this.data.param)
   },
   onReady() {
     // this.getUserList()
@@ -53,18 +57,6 @@ Page({
         userlist: [...this.data.userlist, ...userlist]
       })
     })
-    // this.getUserList({page: this.data.param.page++, size: this.data.param.size}).then(res => {
-    //   if (refreshed) {
-    //     wx.showToast({
-    //       title: '没有刷出新消息哦！'
-    //     })
-    //   } else {
-    //     let userlist = this.formatTimeline(res.content)
-    //     this.setData({
-    //       userlist: [...this.data.userlist, ...userlist]
-    //     })
-    //   }
-    // })
   },
   async getUserList(query = {page:0, size: 10}, callback) {
     let that = this;
@@ -95,9 +87,11 @@ Page({
       var that = this;
       // 获取到用户的信息了，打印到控制台上看下
       let userInfo = res.detail.userInfo;
-      this.setData({isHide: false})
       app.doLogin(res => {
+        console.log('登录成功')
+        console.log(res)
         if (res.code === 0) { // 成功
+          this.setData({isHide: false})
           wx.setStorageSync("Authorization", res.data.module.token);
           wx.setStorageSync("userInfo", res.data.module.userInfo);
           this.getUserList(this.data.param)

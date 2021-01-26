@@ -70,7 +70,7 @@ App({
                 if (res.code === 0) {
                   that.globalData.userInfo = res.data.module.userInfo;
                   that.globalData.Authorization = res.data.module.token;
-                  // wx.setStorageSync("userInfo", res.module.userInfo);
+                  wx.setStorageSync("userInfo", res.data.module.userInfo);
                   wx.setStorageSync("Authorization", res.data.module.token);
                   console.log(111111)
                   if (callback) {
