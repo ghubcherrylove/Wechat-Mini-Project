@@ -6,11 +6,12 @@
   <swiper-item catchtouchmove="stopTouchMove">
    <view class='swiper-con'>
     <view class="message" wx:for="{{interactionList}}" wx:for-item="item" wx:key="index" bindtap="userButtonTap" data-data='{{item}}'>
-      <image class="message-head" src="../../assets/noHead.jpg"></image>
+      <image class="message-head" src="{{item.avatarUrl}}"></image>
       <view class="message-info">
        <view class="message-right">
          <text class="doctor-name">{{item.doctorName}}</text>
-         <image src="{{item.avatarUrl}}" style="height:40px;width:40px"></image>  
+         <text class="doctor-name">{{item.message}}</text>
+         <!-- <image src="{{item.avatarUrl}}" style="height:40px;width:40px"></image>   -->
        </view>
        <view>
          <text class="new-message-time">{{item.date}}</text>

@@ -76,12 +76,13 @@ Page({
     let authnizatin =  wx.getStorageSync("Authorization");
     request.get('/api/chat/loadMessage',{toOpenId: this.data.otherUserOpenid},{Authorization:authnizatin}).then(res => {
       res.data.data.forEach((item) => {
-        if (this.data.thisUserOpenid == item.senderId) {//对方说的
+        console.log(item)
+        if (this.data.thisUserOpenid == item.senderOpenId) {//对方说的
           this.setData({
             ['msgList['+i+']'] : {
               speaker: 'our',
               contentType: 'text',
-              content: item.content
+              content: item.data
             }
           })
         } else {//自己说的
@@ -89,7 +90,7 @@ Page({
             ['msgList['+i+']'] : {
               speaker: 'others',
               contentType: 'text',
-              content: item.content
+              content: item.data
             }
           })
         }

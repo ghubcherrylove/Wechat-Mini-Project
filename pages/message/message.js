@@ -69,14 +69,14 @@ Page({
     request.get('/api/chat/'+openId, {}, {Authorization:authnizatin}).then(res => {
       console.log(res);
       res.data.data.forEach((item) => {
-        console.log(item.openId)
+        // console.log(item)
         this.setData({
           ['interactionList['+i+']'] : {
             doctorOpenid: item.openId,
             userOpenid: item.openId,
             doctorName: item.nickName,
-            message: item.openId,
-            date: item.openId,
+            message: item.content,
+            date: item.createTime,
             avatarUrl: item.avatarUrl
           }
         })
