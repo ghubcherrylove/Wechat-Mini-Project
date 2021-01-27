@@ -159,8 +159,6 @@ Page({
   onLoad: function (options) {
     if (options.openId) {
       UserService.getUserInfoByOpenid(options.openId).then(res => {
-        console.log('res')
-        console.log(res)
         if (res.code === 0) {
           this.setData({entity: {...res.data.userInfo, birthDate: util.formatDateDay(res.data.userInfo.birthDate)}})
         }

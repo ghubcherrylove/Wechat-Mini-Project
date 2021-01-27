@@ -10,7 +10,8 @@ Page({
   data: {
     files: [],
     selectFile: [],
-    uplaodFile: []
+    uplaodFile: [],
+    disabled: true // 控制按钮是否可点击
   },
   // 提交图片
   submit() {
@@ -93,6 +94,7 @@ Page({
   },
   uploadSuccess(e) {
     console.log('upload success', e.detail)
+    this.setData({disabled: false})
   },
   /**
    * 生命周期函数--监听页面加载

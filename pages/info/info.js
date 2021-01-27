@@ -33,7 +33,7 @@ Page({
       id: "",
       realName: "",
       date: '2021-01-01',
-      sex: 0,
+      gender: 0,
       height: "",
       weight: "",
       lifePhotos: "",
@@ -49,7 +49,7 @@ Page({
       constellation: '8',
       selfIntroduction: ""
     },
-    sexs: [
+    genders: [
         {name: '男', value: '1', checked: true},
         {name: '女', value: '0'}
     ],
@@ -116,7 +116,7 @@ Page({
   },
   // 性别改变
   bindSexChange(e) {
-    let str = 'entity.sex';
+    let str = 'entity.gender';
     this.setData({
       [str]: e.detail.value
     })
@@ -236,14 +236,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('options-----')
-    console.log(options)
+    let userStorageInfo = wx.getStorageSync("userInfo");
     if (options.openId) {
       UserService.getUserInfoByOpenid(options.openId).then(res => {
-        console.log('res')
-        console.log(res)
         if (res.code === 0) {
-          this.setData({entity: {...res.data.userInfo, birthDate: util.formatDateDay(res.data.userInfo.birthDate)}})
+          // 获取本地的用户信息
+          let userStorageInfo = wx.getStorageSync("userInfo");
+          this.setData({entity: {...res.data.userInfo, realName: userStorageInfo.nickName || '', gender: userStorageInfo.gender || '', birthDate: util.formatDateDay(res.data.userInfo.birthDate)}})
         }
       })
     }

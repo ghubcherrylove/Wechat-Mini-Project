@@ -7,6 +7,6 @@
         </mp-cells>
     </view>
     <view class="btn-area button-sp-area">
-      <button style="margin: 100rpx 0; background: #ff9630" type="primary" bindtap="submit">提交</button>
+      <button disabled="{{disabled}}" style="margin: 100rpx 0; background: #ff9630" type="primary" bindtap="submit">提交</button>
     </view>
 </view>

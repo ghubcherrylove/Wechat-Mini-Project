@@ -8,8 +8,8 @@
         </mp-cell>
 
         <mp-cells title="性别">
-          <mp-checkbox-group prop="sex" multi="{{false}}" bindchange="radioChange">
-            <mp-checkbox wx:for="{{sexs}}" wx:key="value" label="{{item.name}}" value="{{item.value}}"
+          <mp-checkbox-group prop="gender" multi="{{false}}" bindchange="radioChange">
+            <mp-checkbox wx:for="{{genders}}" wx:key="value" label="{{item.name}}" value="{{item.value}}"
               checked="{{item.checked}}"></mp-checkbox>
           </mp-checkbox-group>
         </mp-cells>

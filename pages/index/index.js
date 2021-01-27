@@ -50,15 +50,23 @@ Page({
   scrollToLower() {
     if (loadingMore || loadedEnd) return false
     loadingMore = true;
-    let that = this;
     this.getUserList({page: ++this.data.param.page, size: this.data.param.size}, data => {
-      let userlist = this.formatTimeline(data.content)
+      let userlist = this.formatTimeline(data.content);
+      if (userlist.length === 0) {
+        wx.showToast({
+          title: '没有数据了',
+          icon: 'error'
+        })
+      }
       this.setData({
         userlist: [...this.data.userlist, ...userlist]
       })
+    }, data => {
+      loadingMore = false
+      loadedEnd = false
     })
   },
-  async getUserList(query = {page:0, size: 10}, callback) {
+  async getUserList(query = {page:0, size: 10}, callback, complete) {
     wx.showToast({
       title: 'loading...',
       icon: 'loading'
@@ -68,6 +76,7 @@ Page({
     if (code === 0) { // 成功
       if (callback) {
         callback(data)
+        complete(data)
       } else {
         let userlist = this.formatTimeline(data.content);
         this.setData({
@@ -75,6 +84,7 @@ Page({
         })
       }
     }
+
   },
   bindGetUserInfo: function (res) {
     if (res.detail.userInfo) {
