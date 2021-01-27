@@ -6,8 +6,8 @@ var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
 var socketOpen = false;
 var frameBuffer_Data, session, SocketTask;
-var url = 'ws://localhost:8000/webSocket/';
-var upload_url ='http://localhost:8000/file/upload'
+var url = 'wss://aicloud.thingsmatrix.co/webSocket/';
+var upload_url ='https://aicloud.thingsmatrix.co/file/upload'
 import request from '../../utils/request'
 /**
  * 初始化数据
@@ -39,7 +39,8 @@ Page({
     inputVal: '',
     imgUrl: '',
     otherUserOpenid: '',
-    thisUserOpenid: ''
+    thisUserOpenid: '',
+    theOtherAvatarUtl: ''
   },
 
   changeOtherName:function(){
@@ -76,7 +77,7 @@ Page({
     let authnizatin =  wx.getStorageSync("Authorization");
     request.get('/api/chat/loadMessage',{toOpenId: this.data.otherUserOpenid},{Authorization:authnizatin}).then(res => {
       res.data.data.forEach((item) => {
-        // console.log(item)
+        console.log(item)
         if (this.data.thisUserOpenid == item.senderOpenId) {//对方说的
           this.setData({
             ['msgList['+i+']'] : {

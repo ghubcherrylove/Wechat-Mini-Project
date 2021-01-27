@@ -1,6 +1,6 @@
 var request = {};
 request.options = {
-  baseUrl: 'http://localhost:8000'
+  baseUrl: 'https://aicloud.thingsmatrix.co'
 }
 
 request.get = function (url, data, header = {}) {
