@@ -28,11 +28,17 @@ Page({
         console.log(res)
         if (res.code === 0) { // 成功
           wx.showToast({
-            title: '添加成功'
-          });
+            icon: 'none',
+            title: '上传生活照成功!',
+          })
           // 回到我的tar页
           wx.switchTab({
             url: '/pages/settings/settings',
+          })
+        } else {
+          wx.showToast({
+            icon: 'error',
+            title: '上传生活照失败!',
           })
         }
       }).catch((err) => {
