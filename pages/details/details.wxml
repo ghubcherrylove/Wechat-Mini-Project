@@ -35,7 +35,7 @@
     <mp-cells ext-class="my-cells" title="其它详情">
       <mp-cell>
         <view>生活照</view>
-        <image src="{{entity.lifePhotos}}"></image>
+        <image mode="aspectFit" src="{{entity.lifePhotos}}"></image>
       </mp-cell>
       <mp-cell>
         <view>是否有车</view>

@@ -1,6 +1,6 @@
 let config = require('./config/index')
 let LoginService = require('./services/LoginService')
-let baseUrl = 'https://aicloud.thingsmatrix.co/'
+let baseUrl = 'https://www.aicloud.site/'
 
 App({
   onLaunch() {

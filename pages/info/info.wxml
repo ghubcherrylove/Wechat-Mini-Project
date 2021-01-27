@@ -121,7 +121,7 @@
     </mp-form>
   </view>
 
-  <view class="weui-btn-area">
-    <button class="weui-btn" type="primary" style="background:#99ccff" bindtap="submitForm">确定</button>
+  <view class="btn-area">
+    <button type="primary" style="margin: 100rpx 0; background: #ff9630" bindtap="submitForm">确定</button>
   </view>
 </view>

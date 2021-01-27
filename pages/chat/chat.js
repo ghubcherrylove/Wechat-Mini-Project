@@ -7,7 +7,7 @@ var keyHeight = 0;
 var socketOpen = false;
 var frameBuffer_Data, session, SocketTask;
 var url = 'wss://aicloud.thingsmatrix.co/webSocket/';
-var upload_url ='https://aicloud.thingsmatrix.co/file/upload'
+var upload_url ='https://www.aicloud.site/file/upload'
 import request from '../../utils/request'
 /**
  * 初始化数据

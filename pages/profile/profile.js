@@ -5,7 +5,7 @@ Page({
     genderMap: {'Male': '男', 'Female': '女'}
   },
   onLoad(options) {
-    // https://aicloud.thingsmatrix.co/sell/user/1 获取用户接口
+    // https://www.aicloud.site/sell/user/1 获取用户接口
     console.log('--options--')
     console.log(options)
     app.getUserInfo(userInfo => {

@@ -6,6 +6,7 @@
 
 .image-avatorUrl {
   width: 100%;
+  border-radius: 15rpx;
 }
 
 /* 授权相关样式 */

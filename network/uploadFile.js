@@ -1,4 +1,4 @@
-let API_PATH = 'https://aicloud.thingsmatrix.co/'
+let API_PATH = 'https://www.aicloud.site/'
 import config from '../config/index'
 
 // http状态码对应的默认文本提醒
