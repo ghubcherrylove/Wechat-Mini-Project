@@ -1,6 +1,7 @@
 let config = require('./config/index')
 let LoginService = require('./services/LoginService')
 let baseUrl = 'https://www.aicloud.site/'
+var url = 'wss://aicloud.thingsmatrix.co/webSocket/';
 
 App({
   onLaunch() {
@@ -29,10 +30,35 @@ App({
         fail(err){
           console.log('保存图片失败!')
           console.log(err)
-          wx.showToast({ title: '请求失败,请刷新后重试', icon: 'none' });
+          wx.showToast({ title: '请求失败,请刷新后重试', icon: 'error' });
           reject(err)
         }
       })
+    })
+  },
+  // webSocket连接
+  webSocket: function () {
+    let auth =  wx.getStorageSync("Authorization");
+    // res.data.module.userInfo.openId
+    let userInfo =  wx.getStorageSync("userInfo");
+    // 创建Socket
+    this.globalData.SocketTask = wx.connectSocket({
+      url: url + userInfo.openId +"?"+"Authorization="+auth,
+      data: 'data',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: 'post',
+      success: function (res) {
+        // socketOpen = true;
+        console.log('WebSocket连接创建', res);
+      },
+      fail: function (err) {
+        wx.showToast({
+          title: '网络异常！',
+        })
+        console.log(err)
+      },
     })
   },
    // 公共登录动作 
@@ -72,6 +98,7 @@ App({
                   that.globalData.Authorization = res.data.module.token;
                   wx.setStorageSync("userInfo", res.data.module.userInfo);
                   wx.setStorageSync("Authorization", res.data.module.token);
+                  that.webSocket();
                   console.log(111111)
                   if (callback) {
                     callback(res);

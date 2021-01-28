@@ -42,7 +42,7 @@ const uploadFile = (url, filePath, param, header) => {
       },
       fail(err){
         console.log(err)
-        wx.showToast({ title: '请求失败,请刷新后重试', icon: 'none' });
+        wx.showToast({ title: '请求失败,请刷新后重试', icon: 'error' });
         reject(err)
       }
     })

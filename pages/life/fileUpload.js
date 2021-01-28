@@ -29,7 +29,7 @@ Page({
         console.log(res)
         if (res.code === 0) { // 成功
           wx.showToast({
-            icon: 'none',
+            icon: 'success',
             title: '上传生活照成功!',
           })
           // 回到我的tar页
@@ -44,6 +44,7 @@ Page({
         }
       }).catch((err) => {
         wx.showToast({
+          icon: 'error',
           title: '保存失败'
         })
       })

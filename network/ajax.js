@@ -32,7 +32,7 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
   return new Promise(function(resolve, reject) {
     try {
       wx.showLoading({
-        title: '加载中',
+        title: '加载中'
       })
       wx.request({
         url: config.baseUrl + url,
@@ -50,6 +50,7 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
             } else {
               let message = res.data.msg;
               wx.showToast({
+                icon: 'error',
                 title: message || '请求失败!'
               })
               reject(res.data)
@@ -57,6 +58,7 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
           } else {
             let message = codeMessage[res.statusCode];
             wx.showToast({
+              icon: 'error',
               title: message || '请求失败!'
             })
             if (res.statusCode === 401) {
@@ -70,6 +72,7 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
         fail: function(fail) {
           let message = codeMessage[fail.statusCode];
           wx.showToast({
+            icon: 'error',
             title: message || '请求失败!'
           })
           reject(fail)
