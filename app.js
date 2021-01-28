@@ -3,6 +3,32 @@ let LoginService = require('./services/LoginService')
 let baseUrl = 'https://www.aicloud.site/'
 var url = 'wss://aicloud.thingsmatrix.co/webSocket/';
 
+// WebSocket 心跳对象
+let heartCheck = {
+  timeout: 10000, 
+  timeoutObj: null,
+  serverTimeoutObj: null,
+  reset: function () {
+   clearTimeout(this.globalData.timeoutObj);
+   clearTimeout(this.globalData.serverTimeoutObj);
+   return this;
+  },
+  start: function () {
+   this.globalData.timeoutObj = setTimeout(()=> {
+    console.log("发送ping");
+    wx.sendSocketMessage({
+     data:"ping",
+     // success(){
+     //  console.log("发送ping成功");
+     // }
+    });
+    this.globalData.serverTimeoutObj = setTimeout(() =>{
+     wx.closeSocket(); 
+    }, this.globalData.timeout);
+   }, this.globalData.timeout);
+  }
+ };
+
 App({
   onLaunch() {
     //TODO
@@ -36,8 +62,50 @@ App({
       })
     })
   },
+  onHide() {
+    // 关闭WebSocket
+    this.globalData.SocketTask.close()
+  },
+  // 短线重连
+  reconnect() {
+    if (this.globalData.lockReconnect) return;
+    this.globalData.lockReconnect = true;
+    this.globalData.lockReconnect = true;
+    clearTimeout(this.globalData.timer)
+    if (this.globalData.limit < 12) {
+     this.globalData.timer = setTimeout(() => {
+      this.webSocket();
+      this.globalData.lockReconnect = false;
+     }, 5000);
+     this.globalData.limit = this.globalData.limit + 1
+    }
+  },
+  initEventHandle() {
+    let that = this
+    wx.onSocketMessage((res) => {
+      //收到消息
+      if (res.data == "pong"){
+        heartCheck.reset().start()
+       } else {
+        // 处理数据
+       }
+    })
+    wx.onSocketOpen(()=>{
+      console.log('app WebSocket连接打开')
+      heartCheck.reset().start()
+    })
+    wx.onSocketError(function (res) {
+      console.log('app WebSocket连接打开失败')
+      that.reconnect()
+    })
+    wx.onSocketClose(function (res) {
+      console.log('app WebSocket 已关闭！')
+      that.reconnect()
+    })
+  },
   // webSocket连接
   webSocket: function () {
+    let that = this;
     let auth =  wx.getStorageSync("Authorization");
     // res.data.module.userInfo.openId
     let userInfo =  wx.getStorageSync("userInfo");
@@ -52,6 +120,7 @@ App({
       success: function (res) {
         // socketOpen = true;
         console.log('WebSocket连接创建', res);
+        that.initEventHandle()
       },
       fail: function (err) {
         wx.showToast({
@@ -159,7 +228,13 @@ App({
   },
   globalData: {
     userInfo: null,
-    SocketTask: null, // 全局webSocket
+    SocketTask: null, // 全局webSocket，
+    serverTimeoutObj: null,
+    timeoutObj: null,
+    timeout: 10000,
+    lockReconnect: false,
+    timer: null,
+    limit: 1,
     Authorization: ''
   }
 })
