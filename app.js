@@ -159,6 +159,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    SocketTask: null, // 全局webSocket
     Authorization: ''
   }
 })
