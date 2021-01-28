@@ -196,6 +196,13 @@ Page({
 
   },
   submitTo: function () {
+    if (!inputVal) {
+      wx.showToast({
+        title: '不能发送空内容',
+        icon: 'none'
+      })
+      return
+    }
     if (socketOpen) {
       console.log('test');
       var message = {"toUserId":this.data.otherUserOpenid,"senderOpenId":this.data.thisUserOpenid,"data":this.data.inputVal,"cmd":"txt"}
