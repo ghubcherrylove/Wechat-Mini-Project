@@ -1,7 +1,7 @@
 let config = require('./config/index')
 let LoginService = require('./services/LoginService')
 let baseUrl = 'https://www.aicloud.site/'
-var url = 'wss://aicloud.thingsmatrix.co/webSocket/';
+var url = 'wss://www.aicloud.site/webSocket/';
 
 // WebSocket 心跳对象
 let heartCheck = {
@@ -9,12 +9,12 @@ let heartCheck = {
   timeoutObj: null,
   serverTimeoutObj: null,
   reset: function () {
-   clearTimeout(this.globalData.timeoutObj);
-   clearTimeout(this.globalData.serverTimeoutObj);
-   return this;
+    clearTimeout(this.timeoutObj);
+    clearTimeout(this.serverTimeoutObj);
+    return this;
   },
   start: function () {
-   this.globalData.timeoutObj = setTimeout(()=> {
+   this.timeoutObj = setTimeout(()=> {
     console.log("发送ping");
     wx.sendSocketMessage({
      data:"ping",
@@ -22,10 +22,10 @@ let heartCheck = {
      //  console.log("发送ping成功");
      // }
     });
-    this.globalData.serverTimeoutObj = setTimeout(() =>{
+    this.serverTimeoutObj = setTimeout(() =>{
      wx.closeSocket(); 
-    }, this.globalData.timeout);
-   }, this.globalData.timeout);
+    }, this.timeout);
+   }, this.timeout);
   }
  };
 
@@ -107,7 +107,6 @@ App({
   webSocket: function () {
     let that = this;
     let auth =  wx.getStorageSync("Authorization");
-    // res.data.module.userInfo.openId
     let userInfo =  wx.getStorageSync("userInfo");
     // 创建Socket
     this.globalData.SocketTask = wx.connectSocket({
