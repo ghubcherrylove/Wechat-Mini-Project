@@ -1,7 +1,7 @@
 let config = require('./config/index')
 let LoginService = require('./services/LoginService')
-let baseUrl = 'http://localhost:8000'
-var url = 'ws://localhost:8000/webSocket/';
+let baseUrl = 'https://www.aicloud.site'
+var url = 'wss://www.aicloud.site/webSocket/';
 
 // WebSocket 心跳对象
 let heartCheck = {
@@ -81,7 +81,7 @@ App({
     wx.onSocketMessage((res) => {
       
       //收到消息
-      if (JSON.parse(res.data).data == "p111ong"){
+      if (JSON.parse(res.data).data == "pong"){
         heartCheck.reset().start()
        } else {
         // 处理数据

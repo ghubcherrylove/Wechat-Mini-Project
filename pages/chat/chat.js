@@ -5,8 +5,8 @@ var windowWidth = wx.getSystemInfoSync().windowWidth;
 var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
 var socketOpen = false;
-var url = 'ws://localhost:8000/webSocket/';
-var upload_url ='http://localhost:8000/file/upload'
+var url = 'wss://www.aicloud.site/webSocket/';
+var upload_url ='https://www.aicloud.site/file/upload'
 import request from '../../utils/request'
 /**
  * 初始化数据
@@ -190,7 +190,7 @@ Page({
         wx.uploadFile({
           filePath: res.tempFilePaths[0],
           name: 'file',
-          url: "http://localhost:8000/upload",
+          url: "https://www.aicloud.site/upload",
           formData: {
             'user': '落花人独立'
           },

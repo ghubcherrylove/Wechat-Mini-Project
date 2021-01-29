@@ -1,4 +1,4 @@
-let API_PATH = 'http://localhost:8000'
+let API_PATH = 'https://www.aicloud.site'
 import config from '../config/index'
 let app = getApp()
 
