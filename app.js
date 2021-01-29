@@ -81,7 +81,7 @@ App({
     wx.onSocketMessage((res) => {
       
       //收到消息
-      if (JSON.parse(res.data).data == "pong"){
+      if (JSON.parse(res.data).data == "p111ong"){
         heartCheck.reset().start()
        } else {
         // 处理数据
@@ -89,14 +89,16 @@ App({
         var routes = pages.map(pa=>pa.route)
         if(routes.indexOf("pages/chat/chat") > -1){
           console.log("包含++++++++++")
-          this.msgList.push({
+          console.log(pages[1].data.msgList)
+          var msglist = Array.from(pages[1].data.msgList)
+          msglist.push({
             speaker: 'others',
             contentType: 'text',
             content: JSON.parse(res.data).data
           })
-          this.setData({
-            msgList
-          });
+          pages[1].setData({
+            msgList: msglist
+          })
         }
        } 
     })
