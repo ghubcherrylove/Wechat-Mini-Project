@@ -1,11 +1,11 @@
 let config = require('./config/index')
 let LoginService = require('./services/LoginService')
-let baseUrl = 'https://www.aicloud.site/'
-var url = 'wss://www.aicloud.site/webSocket/';
+let baseUrl = 'http://localhost:8000'
+var url = 'ws://localhost:8000/webSocket/';
 
 // WebSocket 心跳对象
 let heartCheck = {
-  timeout: 10000, 
+  timeout: 5000, 
   timeoutObj: null,
   serverTimeoutObj: null,
   reset: function () {
@@ -14,18 +14,14 @@ let heartCheck = {
     return this;
   },
   start: function () {
-   this.timeoutObj = setTimeout(()=> {
-    console.log("发送ping");
+   this.timeoutObj = setInterval(()=> {
     wx.sendSocketMessage({
      data:"ping",
-     // success(){
-     //  console.log("发送ping成功");
-     // }
+     success(){
+      // console.log("发送ping成功");
+     }
     });
-    this.serverTimeoutObj = setTimeout(() =>{
-     wx.closeSocket(); 
-    }, this.timeout);
-   }, this.timeout);
+   }, 10000);
   }
  };
 
@@ -83,12 +79,26 @@ App({
   initEventHandle() {
     let that = this
     wx.onSocketMessage((res) => {
+      
       //收到消息
-      if (res.data == "pong"){
+      if (JSON.parse(res.data).data == "pong"){
         heartCheck.reset().start()
        } else {
         // 处理数据
-       }
+        var pages = getCurrentPages();
+        var routes = pages.map(pa=>pa.route)
+        if(routes.indexOf("pages/chat/chat") > -1){
+          console.log("包含++++++++++")
+          this.msgList.push({
+            speaker: 'others',
+            contentType: 'text',
+            content: JSON.parse(res.data).data
+          })
+          this.setData({
+            msgList
+          });
+        }
+       } 
     })
     wx.onSocketOpen(()=>{
       console.log('app WebSocket连接打开')

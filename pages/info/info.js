@@ -242,7 +242,7 @@ Page({
         if (res.code === 0) {
           // 获取本地的用户信息
           let userStorageInfo = wx.getStorageSync("userInfo");
-          this.setData({entity: {...res.data.userInfo, realName: userStorageInfo.nickName || '', gender: userStorageInfo.gender || '', birthDate: util.formatDateDay(res.data.userInfo.birthDate)}})
+          this.setData({entity: {...res.data.userInfo, realName: userStorageInfo.nickName || '', gender: userStorageInfo.gender || ''}})
         }
       })
     }

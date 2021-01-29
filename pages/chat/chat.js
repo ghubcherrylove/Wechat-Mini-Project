@@ -5,9 +5,8 @@ var windowWidth = wx.getSystemInfoSync().windowWidth;
 var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
 var socketOpen = false;
-var frameBuffer_Data, session, SocketTask;
-var url = 'wss://aicloud.thingsmatrix.co/webSocket/';
-var upload_url ='https://www.aicloud.site/file/upload'
+var url = 'ws://localhost:8000/webSocket/';
+var upload_url ='http://localhost:8000/file/upload'
 import request from '../../utils/request'
 /**
  * 初始化数据
@@ -79,7 +78,6 @@ Page({
     let authnizatin =  wx.getStorageSync("Authorization");
     request.get('/api/chat/loadMessage',{toOpenId: this.data.otherUserOpenid},{Authorization:authnizatin}).then(res => {
       res.data.data.forEach((item) => {
-        console.log(item)
         if (this.data.thisUserOpenid == item.senderOpenId) {//对方说的
           this.setData({
             ['msgList['+i+']'] : {
@@ -100,59 +98,12 @@ Page({
         i++;
       })
     })
-    if (!socketOpen) {
-      this.webSocket()
-    }
   },
   onReady: function () {
     var that = this;
-    SocketTask.onOpen(res => {
-      socketOpen = true;
-      console.log('监听 WebSocket 连接打开事件。', res)
-    })
-    SocketTask.onClose(onClose => {
-      console.log('监听 WebSocket 连接关闭事件。', onClose)
-      socketOpen = false;
-      this.webSocket()
-    })
-    SocketTask.onError(onError => {
-      console.log('监听 WebSocket 错误。错误信息', onError)
-      socketOpen = false
-    })
-    SocketTask.onMessage(onMessage => {
-      msgList.push({
-        speaker: 'others',
-        contentType: 'text',
-        content: JSON.parse(onMessage.data).data
-      })
-      this.setData({
-        msgList
-      });
-      console.log('监听WebSocket接受到服务器的消息事件。服务器返回的消息', onMessage.data)
-    })
+    
   },
-  webSocket: function () {
-    let auth =  wx.getStorageSync("Authorization");
-    // 创建Socket
-    SocketTask = wx.connectSocket({
-      url: url + this.data.thisUserOpenid+"?"+"Authorization="+auth,
-      data: 'data',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: 'post',
-      success: function (res) {
-        socketOpen = true;
-        console.log('WebSocket连接创建', res)
-      },
-      fail: function (err) {
-        wx.showToast({
-          title: '网络异常！',
-        })
-        console.log(err)
-      },
-    })
-  },
+  
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -196,19 +147,19 @@ Page({
 
   },
   submitTo: function () {
-    if (!inputVal) {
+    console.log("imputval  "+this.data.inputVal)
+    if (!this.data.inputVal) {
       wx.showToast({
         title: '不能发送空内容',
         icon: 'none'
       })
       return
     }
-    if (socketOpen) {
-      console.log('test');
-      var message = {"toUserId":this.data.otherUserOpenid,"senderOpenId":this.data.thisUserOpenid,"data":this.data.inputVal,"cmd":"txt"}
-      // 如果打开了socket就发送数据给服务器
-      sendSocketMessage(message)
-    }
+    console.log('submit to');
+    var message = {"toUserId":this.data.otherUserOpenid,"senderOpenId":this.data.thisUserOpenid,"data":this.data.inputVal,"cmd":"txt"}
+    // 如果打开了socket就发送数据给服务器
+    sendSocketMessage(message)
+    
     msgList.push({
       speaker: 'our',
       contentType: 'text',
@@ -289,7 +240,7 @@ Page({
 function sendSocketMessage(msg) {
   var that = this;
   console.log('通过 WebSocket 连接发送数据', JSON.stringify(msg))
-  SocketTask.send({
+  app.globalData.SocketTask.send({
     data: JSON.stringify(msg)
   }, function (res) {
     console.log('已发送', res)

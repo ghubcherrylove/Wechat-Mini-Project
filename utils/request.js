@@ -1,6 +1,6 @@
 var request = {};
 request.options = {
-  baseUrl: 'https://www.aicloud.site'
+  baseUrl: 'http://localhost:8000'
 }
 
 request.get = function (url, data, header = {}) {
