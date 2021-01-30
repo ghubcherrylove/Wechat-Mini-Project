@@ -105,8 +105,6 @@ Page({
       let query = wx.createSelectorQuery();
       query.select('#inputValue').boundingClientRect(rect=>{
       let keyHeight = rect.height;
-        console.log('keyHeight');
-        console.log(keyHeight);
         this.setData({
           scrollHeight: (windowHeight - keyHeight) + 'px'
         });

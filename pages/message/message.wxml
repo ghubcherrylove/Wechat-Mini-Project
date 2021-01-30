@@ -1,7 +1,7 @@
-<view class='top-tab-swiper'>
+<!-- <view class='top-tab-swiper'>
     <view class='tab  {{currentData == 0 ? "tab-borer" : ""}}'  data-current = "0" bindtap='checkCurrent'>消息</view>
-    <!-- <view class='tab  {{currentData == 1 ? "tab-borer" : ""}}'  data-current = "1" bindtap='checkCurrent'>群聊</view> -->
-</view>
+    <view class='tab  {{currentData == 1 ? "tab-borer" : ""}}'  data-current = "1" bindtap='checkCurrent'>群聊</view>
+</view> -->
 <swiper current="{{currentData}}" class='swiper' style="height:600px;" duration="300" bindchange="bindchange">
   <swiper-item catchtouchmove="stopTouchMove">
    <view class='swiper-con'>
