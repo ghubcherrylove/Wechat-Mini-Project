@@ -6,20 +6,18 @@ var windowHeight = wx.getSystemInfoSync().windowHeight;
 var keyHeight = 0;
 var socketOpen = false;
 var url = 'wss://www.aicloud.site/webSocket/';
-var upload_url ='https://www.aicloud.site/file/upload'
+var upload_url = 'https://www.aicloud.site/file/upload'
 import request from '../../utils/request'
 /**
  * 初始化数据
  */
 function initData(that) {
   inputVal = '';
-  msgList = [
-    {
-      speaker: 'others',
-      contentType: 'text',
-      content: '你好'
-    }
-  ]
+  msgList = [{
+    speaker: 'others',
+    contentType: 'text',
+    content: '你好'
+  }]
   that.setData({
     msgList,
     inputVal
@@ -32,9 +30,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    toView: '',
     scrollHeight: '100%',
     inputBottom: 0,
-    otherName:"",
+    otherName: "",
     inputVal: '',
     imgUrl: '',
     otherUserOpenid: '',
@@ -42,23 +41,24 @@ Page({
     theOtherAvatarUtl: ''
   },
 
-  changeOtherName:function(){
+  changeOtherName: function () {
     wx.setNavigationBarTitle({
-      title:this.data.otherName
+      title: this.data.otherName
     })
   },
-  getUserInput: function(e) {
+  getUserInput: function (e) {
     this.data.inputVal = e.detail.value
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     console.log('chat onLoad')
     console.log(app)
-    this.data.otherUserOpenid = options.otherUserOpenid;
-    this.data.thisUserOpenid = options.thisUserOpenid;
-    console.log(options);
+    console.log(options)
+    // this.data.otherUserOpenid = options.otherUserOpenid;
+    // this.data.thisUserOpenid = options.thisUserOpenid;
+    // console.log(options);
     this.setData({
       otherUserOpenid: options.otherUserOpenid,
       thisUserOpenid: options.thisUserOpenid
@@ -73,22 +73,26 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    let i = 0;  
-    let authnizatin =  wx.getStorageSync("Authorization");
-    request.get('/api/chat/loadMessage',{toOpenId: this.data.otherUserOpenid},{Authorization:authnizatin}).then(res => {
+  onShow: function () {
+    let i = 0;
+    let authnizatin = wx.getStorageSync("Authorization");
+    request.get('/api/chat/loadMessage', {
+      toOpenId: this.data.otherUserOpenid
+    }, {
+      Authorization: authnizatin
+    }).then(res => {
       res.data.data.forEach((item) => {
-        if (this.data.thisUserOpenid == item.senderOpenId) {//对方说的
+        if (this.data.thisUserOpenid == item.senderOpenId) { //对方说的
           this.setData({
-            ['msgList['+i+']'] : {
+            ['msgList[' + i + ']']: {
               speaker: 'our',
               contentType: 'text',
               content: item.data
             }
           })
-        } else {//自己说的
+        } else { //自己说的
           this.setData({
-            ['msgList['+i+']'] : {
+            ['msgList[' + i + ']']: {
               speaker: 'others',
               contentType: 'text',
               content: item.data
@@ -97,31 +101,45 @@ Page({
         }
         i++;
       })
+      // 加载自动到底部（消息输入框的位置）
+      let query = wx.createSelectorQuery();
+      query.select('#inputValue').boundingClientRect(rect=>{
+      let keyHeight = rect.height;
+        console.log('keyHeight');
+        console.log(keyHeight);
+        this.setData({
+          scrollHeight: (windowHeight - keyHeight) + 'px'
+        });
+        this.setData({
+          toView: 'msg-' + (res.data.data.length - 1),
+          inputBottom: keyHeight + 'px'
+        })
+      }).exec();
     })
   },
   onReady: function () {
     var that = this;
-    
+
   },
-  
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
-
   /**
    * 获取聚焦
    */
-  focus: function(e) {
+  focus: function (e) {
+    console.log('111111111111111111')
     keyHeight = e.detail.height;
     this.setData({
       scrollHeight: (windowHeight - keyHeight) + 'px'
@@ -136,7 +154,7 @@ Page({
   },
 
   //失去聚焦(软键盘消失)
-  blur: function(e) {
+  blur: function (e) {
     this.setData({
       scrollHeight: '100%',
       inputBottom: 0
@@ -147,7 +165,7 @@ Page({
 
   },
   submitTo: function () {
-    console.log("imputval  "+this.data.inputVal)
+    console.log("imputval  " + this.data.inputVal)
     if (!this.data.inputVal) {
       wx.showToast({
         title: '不能发送空内容',
@@ -156,10 +174,15 @@ Page({
       return
     }
     console.log('submit to');
-    var message = {"toUserId":this.data.otherUserOpenid,"senderOpenId":this.data.thisUserOpenid,"data":this.data.inputVal,"cmd":"txt"}
+    var message = {
+      "toUserId": this.data.otherUserOpenid,
+      "senderOpenId": this.data.thisUserOpenid,
+      "data": this.data.inputVal,
+      "cmd": "txt"
+    }
     // 如果打开了socket就发送数据给服务器
     sendSocketMessage(message)
-    
+
     msgList.push({
       speaker: 'our',
       contentType: 'text',
@@ -171,7 +194,7 @@ Page({
       inputVal
     });
   },
-  upImg: function() {
+  upImg: function () {
     var that = this;
     wx.chooseImage({
       count: 1,
@@ -179,7 +202,7 @@ Page({
       sourceType: ['album', 'camera'],
       success: (res) => {
         console.log(res);
-        
+
         that.data.imgUrl = res.tempFilePaths[0]
         if (socketOpen) {
           console.log('test');
@@ -196,7 +219,8 @@ Page({
           },
           header: {
             "Content-Type": "multipart/form-data",
-            'accept': 'application/json'},
+            'accept': 'application/json'
+          },
           complete: (res) => {
             console.log(res);
           }
@@ -208,7 +232,7 @@ Page({
   /**
    * 发送点击监听
    */
-  sendClick: function(e) {
+  sendClick: function (e) {
     if (socketOpen) {
       console.log('test');
       // 如果打开了socket就发送数据给服务器
@@ -231,7 +255,7 @@ Page({
   /**
    * 退回上一页
    */
-  toBackClick: function() {
+  toBackClick: function () {
     wx.navigateBack({})
   }
 
@@ -241,9 +265,9 @@ function sendSocketMessage(msg) {
   var that = this;
   console.log('通过 WebSocket 连接发送数据', JSON.stringify(msg))
   app.globalData.SocketTask.send({
-    data: JSON.stringify(msg)
-  }, function (res) {
-    console.log('已发送', res)
+    data: JSON.stringify(msg),
+    success: function (res) {
+      console.log('已发送', res)
+    }
   })
 }
-

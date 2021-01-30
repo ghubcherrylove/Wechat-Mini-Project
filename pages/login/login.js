@@ -1,3 +1,4 @@
+let UserService = require('../../services/UserService')
 let app = getApp();
 
 Page({
@@ -37,9 +38,27 @@ Page({
         console.log('----登录成功，跳转到index首页---------')
         console.log(res)
         if (res.code === 0) {// 登录成功，跳转到index首页
-          wx.switchTab({
-            url: '../../pages/index/index',
+          let openid = res.data.module.openId
+          UserService.getUserInfoByOpenid(openid).then(res => {
+            // 获取用户信息成功
+            console.log('获取用户信息成功')
+            if (res.code === 0) {
+              if (!res.data.userInfo) {
+                // 跳到注册信息页面
+                wx.navigateTo({
+                  url: '../basicInfo/basicInfo',
+                })
+              } else {
+                // 跳到index首页
+                wx.switchTab({
+                  url: '../index/index',
+                })
+              }
+            }
           })
+          // wx.switchTab({
+          //   url: '../../pages/index/index',
+          // })
         }
       })
     } else {

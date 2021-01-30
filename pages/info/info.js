@@ -61,10 +61,10 @@ Page({
     BUY_CARS: Dict.store.BUY_CARS,
     BUY_HOUSES: Dict.store.BUY_HOUSES,
     rules: [
-      {
-        name: 'realName',
-        rules: {required: true, message: '姓名必填'},
-      },
+      // {
+      //   name: 'realName',
+      //   rules: {required: true, message: '姓名必填'},
+      // },
       {
         name: 'height',
         rules: {required: true, message: '身高必填'},
@@ -236,7 +236,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let userStorageInfo = wx.getStorageSync("userInfo");
     if (options.openId) {
       UserService.getUserInfoByOpenid(options.openId).then(res => {
         if (res.code === 0) {

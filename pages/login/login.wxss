@@ -1,4 +1,3 @@
-/* pages/login/login.wxss */
 .headView {
   margin: 90rpx 50rpx 90rpx 50rpx;
   /*上右下左*/

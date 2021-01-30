@@ -94,13 +94,13 @@ Page({
   // 表单提交
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    if (!e.detail.value.realName) {
-      wx.showToast({
-        icon: 'none',
-        title: '请输入姓名',
-      })
-      return
-    }
+    // if (!e.detail.value.realName) {
+    //   wx.showToast({
+    //     icon: 'none',
+    //     title: '请输入姓名',
+    //   })
+    //   return
+    // }
     if (!e.detail.value.height) {
       wx.showToast({
         icon: 'none',
@@ -136,13 +136,13 @@ Page({
       })
       return
     }
-    if (!e.detail.value.job) {
-      wx.showToast({
-        icon: 'none',
-        title: '请输入职业',
-      })
-      return
-    }
+    // if (!e.detail.value.job) {
+    //   wx.showToast({
+    //     icon: 'none',
+    //     title: '请输入职业',
+    //   })
+    //   return
+    // }
     // 保存到后端
     UserService.info(e.detail.value).then(res => {
       console.log('完善信息成功')

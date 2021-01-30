@@ -22,3 +22,12 @@
   font-size: 28rpx;
   color: #808080;
 }
+
+.i-cell-group {
+  margin-bottom: 30rpx;
+}
+
+.i-cell-group-first {
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}

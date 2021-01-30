@@ -1,0 +1,120 @@
+<view>
+  <view class="page__bd">
+    <mp-form id="form" rules="{{rules}}" models="{{entity}}">
+      <mp-cells title="">
+        <mp-cell title="头像">
+          <mp-uploader bindfail="uploadError" bindsuccess="uploadSuccess" select="{{selectFile}}" upload="{{uplaodFile}}" files="{{files}}" max-count="1"></mp-uploader>
+        </mp-cell>
+      </mp-cells>
+
+      <mp-cells title="">
+        <mp-cell prop="phone" title="手机">
+          <input name="phone" bindinput="formInputChange" data-field="phone" value="{{entity.phone}}" type="number"
+            placeholder="请输入您的手机" />
+        </mp-cell>
+        <mp-cell prop="height" title="身高(cm)">
+          <input bindinput="formInputChange" data-field="height" name="height" value="{{entity.height}}" type="number"
+            placeholder="请输入您的身高" />
+        </mp-cell>
+        <mp-cell prop="weight" title="体重(kg)">
+          <input bindinput="formInputChange" data-field="weight" name="weight" value="{{entity.weight}}" type="number"
+            placeholder="请输入您的体重" />
+        </mp-cell>
+        <!-- <mp-cell prop="job" title="职业">
+          <input name="job" bindinput="formInputChange" data-field="job" value="{{entity.job}}"
+            placeholder="请输入您的职业" />
+        </mp-cell> -->
+        <mp-cell prop="salary" title="月收入">
+          <input name="salary" bindinput="formInputChange" data-field="salary" value="{{entity.salary}}" type="number"
+            placeholder="请输入您的收入" />
+        </mp-cell>
+        <mp-cell prop="date" title="出生日期" ext-class="">
+          <view class="wx-cell-right">
+            <picker mode="date" data-field="date" name="birthDate" value="{{entity.birthDate}}" start="1980-01-01"
+              end="2005-01-01" bindchange="bindDateChange">
+              <view class="picker">
+                {{entity.birthDate}}
+                <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+              </view>
+            </picker>
+          </view>
+        </mp-cell>
+        <!-- <mp-cell prop="constellation" title="星座">
+          <view class="wx-cell-right">
+            <picker bindchange="bindConstellationChange" name="constellation" value="{{entity.constellation}}"
+              range="{{constellations}}">
+              <view class="picker">
+                {{constellations[entity.constellation]}}
+                <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+              </view>
+            </picker>
+          </view>
+        </mp-cell> -->
+      </mp-cells>
+
+      <mp-cells>
+        <mp-cell prop="isBuyCar" title="是否有车">
+          <view class="wx-cell-right">
+            <picker bindchange="bindIsBuyCarChange" name="isBuyCar" value="{{entity.isBuyCar}}" range="{{cars}}">
+              <view class="picker">
+                {{BUY_CARS[entity.isBuyCar]}}
+                <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+              </view>
+            </picker>
+          </view>
+        </mp-cell>
+        <mp-cell prop="isBuyHouse" title="是否有房">
+          <view class="wx-cell-right">
+            <picker bindchange="bindIsBuyHouseChange" name="isBuyHouse" value="{{entity.isBuyHouse}}" range="{{houses}}">
+              <view class="picker">
+                {{BUY_HOUSES[entity.isBuyHouse]}}
+                <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+              </view>
+            </picker>
+          </view>
+        </mp-cell>
+        <!-- <mp-cell prop="education" title="学历">
+          <view class="wx-cell-right">
+            <picker bindchange="bindEducationChange" name="education" value="{{entity.education}}" range="{{educations}}">
+            <view class="picker">
+              {{educations[entity.education]}}
+              <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+            </view>
+          </picker>
+          </view>
+        </mp-cell>
+        <mp-cell prop="isMarried" title="婚姻状况">
+          <view class="wx-cell-right">
+            <picker bindchange="bindIsMarriedChange" name="isMarried" value="{{entity.isMarried}}" range="{{marrieds}}">
+            <view class="picker">
+              {{marrieds[entity.isMarried]}}
+              <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+            </view>
+          </picker>
+          </view>
+        </mp-cell> -->
+      </mp-cells>
+
+      <!-- <mp-cells footer="为了保护您的隐私，以上信息仅做系统使用">
+        <mp-cell prop="corporation" title="工作单位">
+          <input name="corporation" bindinput="formInputChange" data-field="corporation" value="{{entity.corporation}}"
+            placeholder="请输入您的工作单位" />
+        </mp-cell>
+        <mp-cell prop="phone" title="手机">
+          <input name="phone" bindinput="formInputChange" data-field="phone" value="{{entity.phone}}" type="number"
+            placeholder="请输入您的手机" />
+        </mp-cell>
+        <mp-cell prop="wechatAccount" title="微信账号">
+          <input name="wechatAccount" bindinput="formInputChange" data-field="wechatAccount" value="{{entity.wechatAccount}}" placeholder="请输入您的微信账号" />
+        </mp-cell>
+        <mp-cell prop="selfIntroduction" title="个性签名">
+          <textarea class="weui-textarea" bindinput="formInputChange" data-field="selfIntroduction" value="{{entity.selfIntroduction}}" placeholder="请输入个性签名" style="height: 3em" />
+        </mp-cell>
+      </mp-cells> -->
+    </mp-form>
+  </view>
+
+  <view class="btn-area">
+    <button type="primary" style="margin: 100rpx 0; background: #ff9630" bindtap="submitForm">注册</button>
+  </view>
+</view>

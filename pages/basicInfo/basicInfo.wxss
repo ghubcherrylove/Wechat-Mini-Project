@@ -1,0 +1,8 @@
+.wx-cell-right {
+  float: right
+}
+
+.image-lifePhotos {
+  width: 240px;
+  height:160px
+}

@@ -25,23 +25,24 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   onLoad() {
+    let that = this;
     if (app.globalData.userInfo) {
-      app.doLogin(res => {
-        if (res.code === 0) {
-          app.webSocket()
-        }
-      })
-      // that.getUserList(this.data.param)
-    } else {
-      // wx.navigateTo({
-      //   url: '/pages/login/login',
+      // app.doLogin(res => {
+      //   if (res.code === 0) {
+      //     app.webSocket()
+      //   }
       // })
+      that.getUserList(this.data.param)
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
       // this.setData({isHide: true})
     }
   },
   onShow() {
     // this.setData({isHide: false})
-    this.getUserList(this.data.param)
+    // this.getUserList(this.data.param)
   },
   onReady() {
     // this.getUserList()

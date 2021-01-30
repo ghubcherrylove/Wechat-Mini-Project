@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "上传生活照",
+  "usingComponents": {
+    "mp-uploader": "weui-miniprogram/uploader/uploader"
+  }
+}

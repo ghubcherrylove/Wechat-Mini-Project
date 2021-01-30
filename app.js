@@ -1,6 +1,6 @@
 let config = require('./config/index')
 let LoginService = require('./services/LoginService')
-let baseUrl = 'https://www.aicloud.site'
+let baseUrl = 'https://www.aicloud.site/'
 var url = 'wss://www.aicloud.site/webSocket/';
 
 // WebSocket 心跳对象
@@ -18,10 +18,13 @@ let heartCheck = {
     wx.sendSocketMessage({
      data:"ping",
      success(){
-      // console.log("发送ping成功");
+      console.log("发送ping成功");
      }
     });
-   }, 10000);
+    // this.serverTimeoutObj = setTimeout(() =>{
+    //  wx.closeSocket(); 
+    // }, this.timeout);
+   }, this.timeout);
   }
  };
 
@@ -35,12 +38,12 @@ App({
     }
   },
   ///上传单个文件
-  uploadFile (url, filePath = '', param) {
+  uploadFile (url, filePath = '', param, name = 'files') {
     return new Promise((resolve, reject) => {
       wx.uploadFile({
         url: baseUrl + 'api/' + url, //仅为示例，非真实的接口地址
         filePath: filePath,
-        name: 'files',
+        name: name,
         formData: param,
         header: {Authorization: wx.getStorageSync("Authorization"), 'content-type': 'multipart/form-data'},
         success (res) { //上传成功
@@ -58,7 +61,7 @@ App({
       })
     })
   },
-  onHide() {
+  onUnload() {
     // 关闭WebSocket
     this.globalData.SocketTask.close()
   },
@@ -79,9 +82,10 @@ App({
   initEventHandle() {
     let that = this
     wx.onSocketMessage((res) => {
-      
       //收到消息
-      if (JSON.parse(res.data).data == "pong"){
+      console.log('接送消息')
+      console.log(res)
+      if (res.data == "pong"){
         heartCheck.reset().start()
        } else {
         // 处理数据
@@ -105,6 +109,10 @@ App({
     wx.onSocketOpen(()=>{
       console.log('app WebSocket连接打开')
       heartCheck.reset().start()
+    })
+    wx.onSocketMessage((result) => {
+      console.log('app 接收服务端推送的消息')
+      console.log(result)
     })
     wx.onSocketError(function (res) {
       console.log('app WebSocket连接打开失败')

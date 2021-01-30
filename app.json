@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/lifePhotos/lifePhotos",
+    "pages/basicInfo/basicInfo",
     "pages/login/login",
     "pages/user/info",
     "pages/info/info",

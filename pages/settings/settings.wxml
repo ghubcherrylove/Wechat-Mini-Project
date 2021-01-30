@@ -9,13 +9,15 @@
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>
-  <view class="wx-cells">
+
+  <!-- <view class="wx-cells">
     <view class="wx-cell" data-route="../info/info" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/feedback.png"></image>
       <text class="wx-cell-text">完善信息</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view>
+  
   <view class="wx-cells">
     <view class="wx-cell" data-route="../certification/certification" bindtap="navToPage">
       <image class="wx-cell-icon" src="../../assets/language.png"></image>
@@ -26,7 +28,6 @@
 
   <view class="wx-cells">
     <view class="wx-cell" data-route="../life/fileUpload" bindtap="navToPage">
-      <!-- <image class="wx-cell-icon" src="../../assets/language.png"></image> -->
       <mp-icon icon="album" type="field" color="#99ccff" size="{{32}}"></mp-icon>
       <text class="wx-cell-text">上传生活照</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
@@ -39,7 +40,29 @@
       <text class="wx-cell-text">关于我们</text>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
-  </view>
+  </view> -->
+
+  <i-cell-group i-class="i-cell-group-first">
+    <i-cell title="认证" data-route="../certification/certification" icon="document" bindtap="navToPage">
+      <i-icon type="document" size="20" color="#80848f" slot="icon" />
+      <i-icon type="enter" slot="footer" size="20" color="#80848f" />
+    </i-cell>
+  </i-cell-group>
+
+  <i-cell-group i-class="i-cell-group">
+    <i-cell title="上传生活照" data-route="../life/fileUpload" icon="document" bindtap="navToPage">
+      <i-icon type="document" size="20" color="#80848f" slot="icon" />
+      <i-icon type="enter" slot="footer" size="20" color="#80848f" />
+    </i-cell>
+  </i-cell-group>
+
+  <i-cell-group i-class="i-cell-group">
+    <i-cell title="关于我们" data-route="../about/about" icon="document" bindtap="navToPage">
+      <i-icon type="document" size="20" color="#80848f" slot="icon" />
+      <i-icon type="enter" slot="footer" size="20" color="#80848f" />
+    </i-cell>
+  </i-cell-group>
+
   <!-- <view class="wx-cells" wx:if="{{!userInfo.gender}}">
     <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
   </view> -->

@@ -61,6 +61,8 @@ function ajax({url = '', query, data, complete = () => {}, method = 'GET', heade
               icon: 'error',
               title: message || '请求失败!'
             })
+            console.log('--res111111--')
+            console.log(res)
             if (res.statusCode === 401) {
               wx.navigateTo({
                 url: '/pages/login/login',

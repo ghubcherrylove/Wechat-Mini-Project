@@ -3,7 +3,7 @@
 <view style="padding-top: 20rpx;">
   <scroll-view scroll-y scroll-into-view='{{toView}}' style='height: {{scrollHeight}};'>
     <!-- <view class='scrollMsg'> -->
-    <block wx:key wx:for='{{msgList}}' wx:for-index="index">
+    <block wx:key wx:for='{{msgList}}' wx:for-index="index" id="item{{index}}">
       <!--  发出（左） -->
       <view wx:if='{{item.speaker=="others"}}' id='msg-{{index}}' class="others">
         <view>
@@ -34,7 +34,7 @@
 
   <view class='input-room' style='bottom: {{inputBottom}}'>
     <image style='width: 8%; margin-left: 3.2%;' src='../../assets/pic_icon.png' mode='widthFix' bindtap="upImg"></image>
-    <input bindconfirm='sendClick' adjust-position='{{false}}' bindinput="getUserInput" value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur'></input>
+    <input id="inputValue" bindconfirm='sendClick' adjust-position='{{false}}' bindinput="getUserInput" value='{{inputVal}}' confirm-type='send' bindfocus='focus' bindblur='blur'></input>
     <button bindtap="submitTo" class='user_input_text' style="margin: 0 2% 0 3.2%;width: 22%;">发送</button>
   </view>
 </view>

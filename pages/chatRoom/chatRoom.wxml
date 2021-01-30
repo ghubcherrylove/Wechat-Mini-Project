@@ -1,0 +1,6 @@
+<view class='input-room' style='bottom: {{inputBottom}}'>
+    <image style='width: 8%; margin-left: 3.2%;' src='../../assets/pic_icon.png' mode='widthFix' bindtap="upImg"></image>
+    <input bindconfirm='sendClick' adjust-position='{{false}}' bindinput="getUserInput" value='{{inputVal}}' confirm-type='send'></input>
+    <text>{{}}</text>
+    <button bindtap="submitTo" class='user_input_text' style="margin: 0 2% 0 3.2%;width: 22%;">发送</button>
+  </view>
