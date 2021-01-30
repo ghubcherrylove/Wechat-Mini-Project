@@ -18,7 +18,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ff9630",
+    "navigationBarBackgroundColor": "#e24c27",
     "navigationBarTitleText": "一支小红花",
     "navigationBarTextStyle": "white"
   },
@@ -27,7 +27,7 @@
   },
   "tabBar": {
     "color": "#929292",
-    "selectedColor": "#ff9630",
+    "selectedColor": "#e24c27",
     "backgroundColor": "#f7f7f8",
     "borderStyle": "white",
     "list": [

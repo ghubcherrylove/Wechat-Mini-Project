@@ -30,6 +30,7 @@
         <view class="user-container">
             <text class="card-name">{{item.nickName || '未知'}}</text>
             <text class="card-time">{{item.birthDate || '未知'}} | {{item.height || '0'}} cm | {{item.weight || '0'}} kg | {{item.salary || 0}} | {{BUY_CARS[item.isBuyCar] || '未知'}} | {{BUY_HOUSES[item.isBuyHouse] || '未知'}}</text>
+            <i-icon data-item="{{item}}" type="like" size="20" color="#e24c27" catchtap="handleClick"></i-icon>
           </view>
       </view>
   </i-card>

@@ -12,7 +12,7 @@
     </mp-form>
   </view>
   <view class="btn-area">
-    <button type="primary" style="margin: 100rpx 0; background: #ff9630" bindtap="submitForm">确定</button>
+    <button type="primary" style="margin: 100rpx 0; background: #e24c27" bindtap="submitForm">确定</button>
   </view>
 </view>
 
@@ -39,6 +39,6 @@
     </view>
   </view>
   <view class="btn-area button-sp-area">
-    <button style="margin: 100rpx 0; background: #ff9630" type="primary" formType="submit">提交</button>
+    <button style="margin: 100rpx 0; background: #e24c27" type="primary" formType="submit">提交</button>
   </view>
 </form> -->

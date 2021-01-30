@@ -115,6 +115,6 @@
   </view>
 
   <view class="btn-area">
-    <button type="primary" style="margin: 100rpx 0; background: #ff9630" bindtap="submitForm">注册</button>
+    <button type="primary" style="margin: 100rpx 0; background: #e24c27" bindtap="submitForm">注册</button>
   </view>
 </view>

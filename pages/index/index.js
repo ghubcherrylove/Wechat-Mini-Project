@@ -47,6 +47,28 @@ Page({
   onReady() {
     // this.getUserList()
   },
+  // 喜欢
+  handleClick(event) {
+    console.log('喜欢')
+    console.log(event)
+    let entity = event.currentTarget.dataset.item
+    if (entity.openId) {
+      UserService.like(entity.openId).then(({code = 1, data = {}, msg = ''}) => {
+        if (code === 0) {
+          console.log('喜欢成功回调')
+          // 跳转到聊天界面
+          let otherUserOpenid = data.senderOpenId;
+          // 获取当前登录用户的openid
+          let userInfo = wx.getStorageSync("userInfo");
+          let thisUserOpenid = userInfo.openId;
+          wx.navigateTo({
+            url: '/pages/chat/chat?thisUserOpenid=' + thisUserOpenid +'&otherUserOpenid=' + otherUserOpenid +'&doctorName=' + entity.nickName,
+          })
+        }
+      })
+    }
+
+  },
   // 跳转到详情页
   navToPage(event) {
     let openid = event.currentTarget.dataset.openid;
