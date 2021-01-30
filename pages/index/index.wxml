@@ -20,7 +20,7 @@
       </view>
     </view>
   </view> -->
-  <i-card bindtap="navToPage" data-openid="{{item.openId}}" wx:for="{{userlist}}" wx:key="id">
+  <i-card bindtap="navToPage" title="" data-openid="{{item.openId}}" wx:for="{{userlist}}" wx:key="id">
       <view slot="content">
         <view class="top-container">
           <image mode="aspectFit" src="{{item.avatarUrl}}"></image>                
@@ -42,9 +42,9 @@
             </view>
           </i-col>
         </i-row>
-        
       </view>
   </i-card>
+  
   <view wx:if="{{empty}}" class="empty">
     <view class="empty-text">获取用户列表失败!</view>
   </view>

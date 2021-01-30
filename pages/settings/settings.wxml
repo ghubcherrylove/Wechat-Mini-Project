@@ -1,5 +1,5 @@
 <view class="container">
-  <view class="wx-cells">
+  <!-- <view class="wx-cells">
     <view class="wx-cell" data-route="../profile/profile" data-id="1" bindtap="navToPage">
       <image class="wx-cell-icon user-avatar" src="{{userInfo.avatarUrl}}"></image>
       <view class="user-info">
@@ -8,7 +8,7 @@
       </view>
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
-  </view>
+  </view> -->
 
   <!-- <view class="wx-cells">
     <view class="wx-cell" data-route="../info/info" bindtap="navToPage">
@@ -41,6 +41,30 @@
       <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
     </view>
   </view> -->
+
+  <!-- <view class="wx-cells">
+    <view class="wx-cell" data-route="../profile/profile" data-id="1" bindtap="navToPage">
+      <image class="wx-cell-icon user-avatar" src="{{userInfo.avatarUrl}}"></image>
+      <view class="user-info">
+        <text class="user-info-text">{{userInfo.nickName}}</text>
+        <text class="user-info-text user-info-uid">City: {{userInfo.city}}</text>
+      </view>
+      <image class="wx-cell-arrow" src="../../assets/right-gray.png"></image>
+    </view>
+  </view> -->
+
+  <i-cell-group i-class="i-cell-group-first">
+    <i-cell>
+      <view class="wx-cell" data-route="../profile/profile" data-id="1" bindtap="navToPage">
+        <image class="wx-cell-icon user-avatar" src="{{userInfo.avatarUrl}}"></image>
+        <view class="user-info">
+          <text class="user-info-text">{{userInfo.nickName}}</text>
+          <text class="user-info-text user-info-uid">City: {{userInfo.city}}</text>
+        </view>
+      </view>
+      <i-icon type="enter" slot="footer" size="20" color="#80848f" />
+    </i-cell>
+  </i-cell-group>
 
   <i-cell-group i-class="i-cell-group-first">
     <i-cell title="认证" data-route="../certification/certification" icon="document" bindtap="navToPage">
