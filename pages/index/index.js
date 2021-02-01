@@ -26,12 +26,11 @@ Page({
   },
   onLoad() {
     let that = this;
-    if (app.globalData.userInfo) {
-      // app.doLogin(res => {
-      //   if (res.code === 0) {
-      //     app.webSocket()
-      //   }
-      // })
+    console.log('index onLoad')
+    let userInfo = wx.getStorageSync("userInfo")
+    let Authorization = wx.getStorageSync("Authorization")
+    if (userInfo.id && Authorization) {
+      app.webSocket()
       that.getUserList(this.data.param)
     } else {
       wx.navigateTo({
@@ -42,6 +41,9 @@ Page({
   },
   onShow() {
     // this.setData({isHide: false})
+    // this.setData({
+    //   userlist: []
+    // })
     // this.getUserList(this.data.param)
   },
   onReady() {
